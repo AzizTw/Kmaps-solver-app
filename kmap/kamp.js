@@ -50,12 +50,12 @@ function getPermutations(array, size) {
 
 class Kmap {
     __setup() {
-        this.minterms_and_dont_cares = union(this.minterms, this.dont_cares)
-        this.prime_implicants = this.get_prime_implicants();
-        let tmp = this.get_coverage_dicts();
-        this.implicant_to_minterms = tmp.implicant_to_minterms;
-        this.minterm_to_implicants = tmp.minterms_to_implicants;
-        this.essential_prime_implicants = this.get_essential_prime_implicants();
+        this.mins_dcs = union(this.mins, this.dcs)
+        this.pis = this.get_pis();
+        let tmp = this.get_cov_dicts();
+        this.imp_to_mins = tmp.imp_to_mins;
+        this.min_to_imps = tmp.min_to_imps;
+        this.epis = this.get_epis();
     }
 
      to_binary(num) {
@@ -66,10 +66,10 @@ class Kmap {
          return binary_num;
      }
 
-    dffer_by_one_bit(minterm1, minterm2) {
-        let differ_count = 0;
-        let final_num = "";
-        let z = zip(minterm1, minterm2);
+    dffer_by_one_bit(m1, m2) {
+        let diff = 0;
+        let res = "";
+        let z = zip(m1, m2);
 
         let b1; // bit1
         let b2; // bit2
@@ -77,147 +77,148 @@ class Kmap {
             b1 = z[i][0];
             b2 = z[i][1];
             if (b1 !== b2) {
-                differ_count++;
-                final_num += "-";
+                diff++;
+                res += "-";
             }
             else {
-                final_num += b1;
+                res += b1;
             }
         }
 
-        if (differ_count == 1)
-            return final_num;
+        if (diff === 1)
+            return res;
         else
             return false;
     }
 
-    translate_implicant(implicant) {
-        if (count(implicant, "-") === implicant.length)
+    translate_implicant(imp) {
+        if (count(imp, "-") === imp.length)
             return "1";
-        returned_implicant = "";
+        let res = "";
 
         // workaround for the lack of ord() in js
         const A = 65;
 
         let bit;
-        for (let i = 0; i < implicant.length; i++) {
-            bit = implicant[i];
+        for (let i = 0; i < imp.length; i++) {
+            bit = imp[i];
             if (bit === "0")
-                returned_implicant += String.fromCharCode(A+i) + "'";
+                res += String.fromCharCode(A+i) + "'";
             else if (bit === "1")
-                returned_implicant += String.fromCharCode(A+i);
+                res += String.fromCharCode(A+i);
         }
 
-        return returned_implicant
+        return res;
     }
 
     count_literals(sop) {
         for (let i = 0; i < sop.length; i++) {
-            let implicant = sop[i];
-            sum += (implicant - count(implicant, "-"));
+            let imp = sop[i];
+            sum += (imp - count(imp, "-"));
         }
         return sum;
     }
 
-    is_covered(minterm, implicant) {
-        let is_covered = true;
-        let z = zip(minterm, implicant);
-        let implicant_bit;
-        let minterm_bit;
+    is_covered(min, imp) {
+        let iscov = true;
+        let z = zip(min, imp);
+        let imp_bit;
+        let min_bit;
         for (let i = 0; i < z.lenght; i++) {
-            minterm_bit = z[i][0];
-            implicant_bit = z[i][1];
-            if (implicant_bit === "-")
+            min_bit = z[i][0];
+            imp_bit = z[i][1];
+            if (imp_bit === "-")
                 continue;
-            else if (implicant_bit !== minterm_bit) {
-                is_covered = false;
+            else if (imp_bit !== min_bit) {
+                iscov = false;
                 break;
             }
         }
-        return is_covered;
+        return iscov;
     }
 
     // we don't have dicts in python, so we're using objects
-    get_coverage_dicts() {
-        let implicant_to_minterms = {};
-        for (let i = 0; i < this.prime_implicants.length; i++)
-            implicant_to_minterms[this.prime_implicants[i]] = new Set();
+    get_cov_dicts() {
+        let imp_to_mins = {};
+        for (let i = 0; i < this.pis.length; i++)
+            imp_to_mins[this.pis[i]] = new Set();
 
-        let minterms_to_implicants = {};
-        for (let i = 0; i < this.prime_implicants.length; i++)
-            minterms_to_implicants[this.minterms[i]] = new Set();
+        let min_to_imps = {};
+        for (let i = 0; i < this.pis.length; i++)
+            min_to_imps[this.mins[i]] = new Set();
 
-        let minterm;
-        let implicant;
+        let min;
+        let imp;
         for (let i = 0; i < this.minterms; i++) {
-            minterm = this.minterms[i];
-            for (let j = 0; j < this.prime_implicants; j++) {
-                implicant = this.prime_implicants[j];
-                if (this.is_covered(minterm, implicant)) {
-                    implicant_to_minterms[implicant].add(minterm);
-                    minterms_to_implicants[minterm].add(implicant)
+            min = this.mins[i];
+            for (let j = 0; j < this.pis; j++) {
+                imp = this.pis[j];
+                if (this.is_covered(min, imp)) {
+                    imp_to_mins[imp].add(min);
+                    min_to_imps[min].add(imp)
                 }
             }
         }
-        return {implicant_to_minterms, minterms_to_implicants};
+        let cov = {imp_to_mins, min_to_imps};
+        return cov;
     }
 
-    get_prime_implicants() {
-        let prime_implicants = new Set();
-        let implicants_all_sizes = [this.minterms_and_dont_cares];
-        for (let i = 1; i < this.num_of_vars+1; i++) {
-            implicants_all_sizes.push(new Set());
+    get_pis() {
+        let pis = new Set();
+        let imps_all = [this.mins_dcs];
+        for (let i = 1; i < this.n+1; i++) {
+            imps_all.push(new Set());
         }
 
         let size;
         let used_once;
         let differ;
-        for (let i = 0; i < implicants_all_sizes.length; i++) {
-            size = implicants_all_sizes[i];
-            for (let implicant1 in size) {
+        for (let i = 0; i < imps_all.length; i++) {
+            size = Array.from(imps_all[i]);
+            for (let imp1 in size) {
                 used_once = false;
-                for (let implicant2 in size) {
-                    differ = this.dffer_by_one_bit(implicant1, implicant2);
+                for (let imp2 in size) {
+                    differ = this.dffer_by_one_bit(imp1, imp2);
                     if (differ) {
                         used_once = true;
-                        implicants_all_sizes[i+1].add(differ);
+                        imps_all[i+1].add(differ);
                     }
                 }
                 if (!used_once) {
-                    prime_implicants.add(implicant1)
+                    pis.add(imp1);
                 }
             }
+        return pis;
         }
-        return prime_implicants;
     }
 
-    get_essential_prime_implicants() {
-        let epi = new Set();
+    get_epis() {
+        let epis = new Set();
 
-        for (const [minterm, prime_implicant] of Object.entries(this.minterm_to_implicants)) {
-            if (prime_implicant.length === 1)
-                epi = union(epi, this.prime_implicants);
+        for (const [min, pi] of Object.entries(this.min_to_imps)) {
+            if (pi.length === 1)
+                epis = union(pi, this.prime_implicants);
         }
 
-        return epi;
+        return epis;
     }
 
     is_covering_all_minterms(possible_min_sop) {
-        let covered = new Set();
+        let cov = new Set();
         for(imp in possible_min_sop) {
-            for (min in this.minterms) {
+            for (min in this.mins) {
                 if (this.is_covered(min, imp)) {
-                    covered.add(min);
+                    cov.add(min);
                 }
             }
         }
-        return set_eq(covered, this.minterms);
+        return set_eq(cov, this.mins);
     }
 
     get_all_min_sop_forms() {
-        let mins_notcov = this.minterms.map((min) => min) // copy
+        let mins_notcov = this.mins.map((min) => min) // copy
         let i;
-        for (let epi in this.essential_prime_implicants) {
+        for (let epi in this.epis) {
             for (min in this.implicant_to_minterms[epi]) {
                 if (mins_notcov.includes(min)) {
                     i = mins_notcov.indexOf(min); // js is stupid
@@ -227,12 +228,12 @@ class Kmap {
         }
 
         if (mins_notcov.length === 0) {
-            return Array.from(this.essential_prime_implicants)
+            return Array.from(this.epis)
         }
 
         let uimp = new Set();
         for (let min in mins_notcov) {
-            for (pi in this.minterm_to_implicants[min]) {
+            for (pi in this.min_to_imps[min]) {
                 uimp.add(pi);
             }
         }
@@ -248,28 +249,26 @@ class Kmap {
         let len = 0;
         let s;
         for (c in combos) {
-            s = Array.from(this.essential_prime_implicants);
+            s = Array.from(this.epi);
             s.push(... c);
             if (this.is_covering_all_minterms(s)) {
                 if (len === 0) {
                     len = this.count_literals(s);
                     sops.push(s);
                 }
-                else if(this.count_literals(s) == len)
+                else if(this.count_literals(s) === len)
                     sops.append(s);
             }
         }
         return sops;
     }
 
-    constructor(num_of_vars, minterms, dont_cares) {
-        this.num_of_vars = num_of_vars;
-        this.minterms = minterms
-        this.dont_cares = dont_cares;
+    constructor(n, mins, dcs) {
+        this.n = n;
+        this.mins = mins
+        this.dcs = dcs;
         this.__setup()
     }
-
-
 };
 
 module.exports = Kmap;
