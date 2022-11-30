@@ -130,29 +130,34 @@ function is_covered(min, imp) {
 
     // we don't have dicts in python, so we're using objects
 function get_cov_dicts(pis, mins) {
-        let imp_to_mins = {};
-        for (let i = 0; i < pis.length; i++)
-            imp_to_mins[pis[i]] = new Set();
+    let imp_to_mins = {};
+    pis.forEach((pi) => imp_to_mins[pi] = new Set());
 
-        let min_to_imps = {};
-        for (let i = 0; i < mins.length; i++)
-            min_to_imps[mins[i]] = new Set();
+    let min_to_imps = {};
+    mins.forEach((m) => min_to_imps[m] = new Set())
 
-        let min;
-        let imp;
-        for (let i = 0; i < mins; i++) {
-            min = this.mins[i];
-            for (let j = 0; j < pis; j++) {
-                imp = this.pis[j];
-                if (is_covered(min, imp)) {
-                    imp_to_mins[imp].add(min);
-                    min_to_imps[min].add(imp)
-                }
+    mins.forEach((min) => {
+        pis.forEach((imp) => {
+            if (is_covered(min, imp)) {
+                imp_to_mins[imp].add(min);
+                min_to_imps[min].add(imp);
             }
-        }
-        let cov = {imp_to_mins, min_to_imps};
-        return cov;
-    }
+        })
+    })
+
+    // for (let i = 0; i < mins; i++) {
+    //     min = this.mins[i];
+    //     for (let j = 0; j < pis; j++) {
+    //         imp = this.pis[j];
+    //         if (is_covered(min, imp)) {
+    //             imp_to_mins[imp].add(min);
+    //             min_to_imps[min].add(imp)
+    //         }
+    //     }
+    // }
+    let cov = {imp_to_mins, min_to_imps};
+    return cov;
+}
 
 function get_pis(mins_dcs, n) {
     let pis = new Set();
@@ -168,7 +173,6 @@ function get_pis(mins_dcs, n) {
     let differ;
     for (let i = 0; i < imps_all.length; i++) {
         size = Array.from(imps_all[i]);
-        console.log(size);
         for (let imp1 of size) {
             used_once = false;
             for (let imp2 of size) {
@@ -262,5 +266,6 @@ module.exports = {
     get_epis,
     get_all_min_sop_forms,
     translate_implicant,
-    to_binary
+    to_binary,
+    get_cov_dicts
 };
