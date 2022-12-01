@@ -44,5 +44,6 @@ body {
 }
 
 #solutionBox {
+    text-align: left;
     display: none;
 }
