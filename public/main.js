@@ -4,9 +4,11 @@ const LENGTH = 3;
 function nextValue(val) {
     return VALUES[(VALUES.indexOf(val)+1) % LENGTH]
 }
+
 function toGray(n) {
     return n ^ (n >> 1);
 }
+
 // Given an array of values, it returns an object containing:
 // - number of variables
 // - minterms
