@@ -47,3 +47,22 @@ body {
     text-align: left;
     display: none;
 }
+
+
+#solutionBox > ul {
+    display: flex;
+    list-style: none;
+    align-items: stretch;
+    justify-content: left;
+    background-color: #458588;
+    gap: 0px;
+}
+
+#solutionBox > ul > li {
+    flex: 1 1 0px;
+    display: block;
+    color: lightgray;
+    background-color: #282828;
+    border: 5px #689d6a solid;
+    padding: 10px;
+}
