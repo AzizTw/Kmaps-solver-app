@@ -63,7 +63,7 @@ function showSolution(sol) {
 
     if (sol.epis !== 0)
         solbox.appendChild(createList("EPIs: ", sol.epis));
-    // else TODO
+    // else TODO: should we really do nothing?
 
     solbox.appendChild(createList("PIs: ", sol.pis));
 
