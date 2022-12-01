@@ -255,11 +255,35 @@ function get_all_min_sop_forms(mins, imp_to_mins, min_to_imps, epis) {
 
     }
 
+// Given the int number of varaibles in a kmap, the int[] minterms and int[]
+// dont_cares returns all prime implicants, essential prime implicants, and
+// minimum sop forms in one object.
+function solve(n, mins, dcs) {
+    mins = new Set(mins.map((e) => to_binary(e, n)))
+    dcs = new Set(dcs.map((e) => to_binary(e, n)));
+    let mins_dcs = union(mins, dcs); // TODO: check for intersection
+    let pis = get_pis(mins_dcs, n);
+    let cov = get_cov_dicts(pis, mins);
+    let epis = get_epis(cov.min_to_imps, pis);
+    let sops = get_all_min_sop_forms(mins, cov.imp_to_mins, cov.min_to_imps, epis);
+
+    // we're essentially done, but lets make the output pretty
+    pis  = Array.from(pis).map((e) => translate_implicant(e, n));
+    epis = Array.from(epis).map((e) => translate_implicant(e, n))
+
+    for (let i = 0; i < sops.length; i++)
+        sops[i] = sops[i].map((e) => translate_implicant(e, n));
+
+    return {epis, pis, sops};
+}
+
 module.exports = {
+    union, // TODO: remove
     get_pis,
     get_epis,
     get_all_min_sop_forms,
     translate_implicant,
     to_binary,
-    get_cov_dicts
+    get_cov_dicts,
+    solve
 };
