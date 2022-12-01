@@ -41,29 +41,31 @@ async function getSolution(input) {
     return await res.json();
 }
 
-function showSolution(sol) {
-    let solbox = document.getElementById('solutionBox');
-    solbox.innerHTML = "";
+function createList(title, content) {
     let ul = document.createElement("ul");
-    solbox.appendChild(ul);
-
     let li;
-    li = document.createElement("li")
-    li.textContent = "EPIs: ";
-    if (sol.epis.length !== 0)
-        li.textContent += sol.epis.join(", ");
-    else
-        li.textContent += "There are no essential prime implicants";
+    li = document.createElement("li");
+    li.textContent = title;
+    ul.appendChild(li);
 
-    ul.appendChild(li)
+    for (let c of content) {
+        li = document.createElement("li");
+        li.textContent = c;
+        ul.appendChild(li);
+    }
 
-    li = document.createElement("li")
-    li.innerHTML = "PIs: &nbsp;" + sol.pis.join(", ");
-    ul.appendChild(li)
+    return ul;
+}
 
-    li = document.createElement("li")
-    li.textContent = sol.sops; // TODO: join this double array somehow
-    ul.appendChild(li)
+function showSolution(sol) {
+    let solbox = document.getElementById("solutionBox");
+    solbox.innerHTML = " ";
+
+    if (sol.epis !== 0)
+        solbox.appendChild(createList("EPIs: ", sol.epis));
+    // else TODO
+
+    solbox.appendChild(createList("PIs: ", sol.pis));
 
     solbox.style.display = "block";
 }
