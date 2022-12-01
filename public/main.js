@@ -4,7 +4,9 @@ const LENGTH = 3;
 function nextValue(val) {
     return VALUES[(VALUES.indexOf(val)+1) % LENGTH]
 }
-
+function toGray(n) {
+    return n ^ (n >> 1);
+}
 // Given an array of values, it returns an object containing:
 // - number of variables
 // - minterms
@@ -16,11 +18,12 @@ function getKmapInput(arr) {
 
     let v;
     for (let i = 0; i < arr.length; i++) {
+        let gray = toGray(i);
         v = arr[i];
         if (v === '1')
-            mins.push(i);
+            mins.push(gray);
         else if (v === 'X')
-            dcs.push(i);
+            dcs.push(gray);
     }
 
     return {mins, dcs, n};
