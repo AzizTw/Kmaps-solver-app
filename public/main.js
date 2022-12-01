@@ -67,6 +67,12 @@ function showSolution(sol) {
 
     solbox.appendChild(createList("PIs: ", sol.pis));
 
+    // make sops look human readable
+    for (let i = 0; i < sol.sops.length; i++)
+        sol.sops[i] = sol.sops[i].join(" + ");
+
+    solbox.appendChild(createList("SOPs: ", sol.sops));
+
     solbox.style.display = "block";
 }
 
