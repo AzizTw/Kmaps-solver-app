@@ -1,0 +1,11 @@
+/* remove bowser styles */
+* {
+    padding: 0;
+    margin: 0;
+}
+
+
+body {
+    margin: 0 auto;
+    max-width: 50vw;
+}
