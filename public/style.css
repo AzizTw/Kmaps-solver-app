@@ -13,6 +13,7 @@ body {
 }
 
 .kmap {
+    padding: 10px;
     margin: 0 auto;
     width: 50%;
     display: grid;
