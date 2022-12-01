@@ -7,6 +7,45 @@ function nextValue(val) {
 function toGray(n) {
     return n ^ (n >> 1);
 }
+
+/*
+Given the number of variables, it returns an array of
+cells in the kmap ordered by gray code.
+kmapPattern(3) = [0, 1, 3, 2, 
+                  4, 5, 7, 6]
+ */
+function kmapPattern(num_vars) {
+    
+    const RowsCount = 2 ** Math.floor(num_vars / 2);
+    const ColumnsCount = 2 ** Math.floor((num_vars + 1) / 2);
+    
+    // The rows in the kmap gray-coded, ex: [00, 01, 11, 10]
+    let rows = [];
+    for (let i = 0; i < RowsCount; i++) {
+        rows.push(toGray(i));
+    }
+    
+    // The columns in the kmap gray-coded, ex: [00, 01, 11, 10]
+    let cols = [];
+    for (let j = 0; j < ColumnsCount; j++) {
+        cols.push(toGray(j));
+    }
+    
+    let kmap = [];
+    for (let row of rows) {
+        for (let col of cols) {
+            // converts the gray code to binary string then pads it with 0s.
+            let rowPart = row.toString(2).padStart(Math.log2(RowsCount),'0');
+            let colPart = col.toString(2).padStart(Math.log2(ColumnsCount),'0');
+
+            // concatenates the two parts, resulting in a cell in the kmap
+            let cell = rowPart + colPart;
+            // push the cell to the kmap after converting it to integer
+            kmap.push(parseInt(cell, 2));
+        }
+    }
+    return kmap;
+}
 // Given an array of values, it returns an object containing:
 // - number of variables
 // - minterms
@@ -16,15 +55,16 @@ function getKmapInput(arr) {
     let dcs = []; // dont_cares
     let n = 4; // TODO: hardcoded to 4 for now
     
+    let pattern = kmapPattern(n);
+
     let v;
     for (let i = 0; i < arr.length; i++) {
-        let gray = toGray(i);
         v = arr[i];
         if (v === '1')
-            mins.push(gray);
+            mins.push(pattern[i]);
 
         else if (v === 'X')
-            dcs.push(gray);
+            dcs.push(pattern[i]);
     }
 
     return {mins, dcs, n};
