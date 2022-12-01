@@ -8,4 +8,36 @@
 body {
     margin: 0 auto;
     max-width: 50vw;
+    text-align: center;
+    background-color: #f0fff0; /* pure white hurts eyes */
+}
+
+.kmap {
+    margin: 0 auto;
+    width: 50%;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    background-color: #689d6a;
+    border: #83a598 5px solid;
+
+}
+
+.kmap > .cell {
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    color: lightgray;
+    background-color: #282828;
+    cursor: pointer;
+    /* font-weight: bold; */
+}
+
+/* disble highlight on double click */
+.kmap > .cell {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
