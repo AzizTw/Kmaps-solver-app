@@ -41,17 +41,42 @@ async function getSolution(input) {
     return await res.json();
 }
 
+function showSolution(sol) {
+    let solbox = document.getElementById('solutionBox');
+    solbox.innerHTML = "";
+    let ul = document.createElement("ul");
+    solbox.appendChild(ul);
+
+    let li;
+    li = document.createElement("li")
+    if (sol.epis.length !== 0)
+        li.textContent = sol.epis.join(", ");
+    else
+        li.textContent = "There are no essential prime implicants";
+
+    ul.appendChild(li)
+
+    li = document.createElement("li")
+    li.textContent = sol.pis.join(", ");
+    ul.appendChild(li)
+
+    li = document.createElement("li")
+    li.textContent = sol.sops; // TODO: join this double array somehow
+    ul.appendChild(li)
+
+    solbox.style.display = "block";
+}
+
 function solve(cells) { // cells ia nodelist of divs
     let vals = Array.from(cells).map((c) => c.innerHTML);
     let input = getKmapInput(vals);
-    getSolution(input).then((sol) => console.log(sol));
+    getSolution(input).then((sol) => showSolution(sol));
 }
 
 function main() {
     let cells = document.querySelectorAll(".kmap > .cell");
     for (let c of cells)
         c.addEventListener('click', () => c.innerHTML = nextValue(c.innerHTML));
-
 
     let solveBtn = document.getElementById("solveBtn");
     // solveBtn.addEventListener('click', parseKmap(Array.from(cells).map((c) => c.innerHTML)));
