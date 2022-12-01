@@ -30,25 +30,26 @@ function set_eq(a, b) {
     return a.size === b.size && [...a].every((x) => b.has(x));
 }
 
-function getPermutations(array, size) {
-
-    function p(t, i) {
-        if (t.length === size) {
-            result.push(t);
-            return;
-        }
-        if (i + 1 > array.length) {
-            return;
-        }
-        p(t.concat(array[i]), i + 1);
-        p(t, i + 1);
-    }
-    var result = [];
-    p([], 0);
-    return result;
+// The three functions below are needed to implement the combinations function
+function* range(start, end) {
+  for (; start <= end; ++start) { yield start; }
 }
 
-// classes were a mistake
+function last(arr) { return arr[arr.length - 1]; }
+
+function* numericCombinations(n, r, loc = []) {
+  const idx = loc.length;
+  if (idx === r) {
+    yield loc;
+    return;
+  }
+  for (let next of range(idx ? last(loc) + 1 : 0, n - r + idx)) { yield* numericCombinations(n, r, loc.concat(next)); }
+}
+
+function* combinations(arr, r) {
+  for (let idxs of numericCombinations(arr.length, r)) { yield idxs.map(i => arr[i]); }
+}
+
 function to_binary(num, n) {
     let bin = num.toString(2);
     let diff = n - bin.length
@@ -103,15 +104,15 @@ function translate_implicant(imp) {
 }
 
 function count_literals(sop) {
+    let sum = 0;
     for (let i = 0; i < sop.length; i++) {
         let imp = sop[i];
-        sum += (imp - count(imp, "-"));
+        sum += (imp.length - count(imp, "-"));
     }
     return sum;
 }
 
 function is_covered(min, imp) {
-    let iscov = true;
     let z = zip(min, imp);
     let imp_bit;
     let min_bit;
@@ -128,7 +129,7 @@ function is_covered(min, imp) {
     return true;
 }
 
-    // we don't have dicts in python, so we're using objects
+// we don't have dicts in python, so we're using objects
 function get_cov_dicts(pis, mins) {
     let imp_to_mins = {};
     pis.forEach((pi) => imp_to_mins[pi] = new Set());
@@ -145,17 +146,6 @@ function get_cov_dicts(pis, mins) {
         })
     })
 
-    // for (let i = 0; i < mins; i++) {
-    //     min = this.mins[i];
-    //     for (let j = 0; j < pis; j++) {
-    //         imp = this.pis[j];
-    //         if (is_covered(min, imp)) {
-    //             imp_to_mins[imp].add(min);
-    //             min_to_imps[min].add(imp)
-    //         }
-    //     }
-    // }
-    // console.log(min_to_imps)
     let cov = {imp_to_mins, min_to_imps};
     return cov;
 }
@@ -216,53 +206,53 @@ function is_covering_all_minterms(mins, possible_min_sop) {
     return set_eq(cov, mins);
 }
 
-function get_all_min_sop_forms(mins, imp_to_mins, epis) {
-    // let mins_notcov = new Set(Array.from(mins).map((min) => min)) // copy
-    // console.log(epis)
-    // let i;
-    // for (let epi of epis) {
-    //     for (let min of imp_to_mins[epi]) {
-    //         if (mins_notcov.includes(min)) {
-    //             i = mins_notcov.indexOf(min); // js is stupid
-    //             mins_notcov.splice(i, 1);
-    //         }
-    //     }
-    // }
+function get_all_min_sop_forms(mins, imp_to_mins, min_to_imps, epis) {
+    let mins_notcov = new Set(Array.from(mins).map((min) => min)) // copy
+    for (let epi of epis) {
+        for (let min of imp_to_mins[epi]) {
+            if (mins_notcov.has(min))
+                mins_notcov.delete(min)
+        }
+    }
 
-    // if (mins_notcov.length === 0) {
-    //     return Array.from(epis)
-    // }
+    if (mins_notcov.size === 0)
+        return [Array.from(epis)] // DONT REMOVE THIS the double array is intentional
 
-    // let uimp = new Set();
-    // for (let min of mins_notcov) {
-    //     for (pi of this.min_to_imps[min]) {
-    //         uimp.add(pi);
-    //     }
-    // }
+    let uimp = new Set(); // usable implicants
+    for (let min of mins_notcov) {
+        for (pi of min_to_imps[min]) {
+            uimp.add(pi);
+        }
+    }
 
-    // let combos = [];
-    // let perms;
-    // for (let i = 1; i < mins_notcov+1; i++) {
-    //     perms = getPermutations(uimp, i);
-    //     combos.push(... perms);
-    // }
+    let combos = [];
+    let perms;
+    for (let i = 1; i < mins_notcov.size+1; i++) {
+        perms = combinations(Array.from(uimp), i);
+        perms = [... perms];
+        combos.push(... perms);
+    }
 
-    //     let sops = [];
-    //     let len = 0;
-    //     let s;
-    //     for (c of combos) {
-    //         s = Array.from(epi);
-    //         s.push(... c);
-    //         if (is_covering_all_minterms(s)) {
-    //             if (len === 0) {
-    //                 len = count_literals(s);
-    //                 sops.push(s);
-    //             }
-    //             else if(count_literals(s) === len)
-    //                 sops.append(s);
-    //         }
-    //     }
-    //     return sops;
+        let sops = [];
+        let len = 0;
+        let s;
+        for (let c of combos) {
+            s = Array.from(epis);
+            s.push(... c);
+            if (is_covering_all_minterms(mins, s)) {
+                // print(is_covering_all_minterms(mins, s))
+                if (len === 0) {
+                    len = count_literals(s);
+                    sops.push(s);
+                }
+                else if(count_literals(s) === len)
+                    // untested branch
+                    sops.push(s);
+            }
+        }
+
+    return sops;
+
     }
 
 module.exports = {
