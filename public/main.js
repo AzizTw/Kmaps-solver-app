@@ -28,22 +28,23 @@ function getKmapInput(arr) {
 }
 
 async function getSolution(input) {
-    let url = "/calc" // TODO: might need to change for practice mode
+    let url = "/" // TODO: might need to change for practice mode
     let res = await fetch(url, {
         method: "POST",
         headers: {
+            "Accept": "application/json",
             "Content-Type": "application/json"
         },
         body: JSON.stringify(input)
     });
 
-    return res.body.solution;
+    return await res.json();
 }
 
 function solve(cells) { // cells ia nodelist of divs
     let vals = Array.from(cells).map((c) => c.innerHTML);
     let input = getKmapInput(vals);
-    console.log(input)
+    getSolution(input).then((sol) => console.log(sol));
 }
 
 function main() {

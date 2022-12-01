@@ -1,4 +1,5 @@
 const express = require('express');
+const kmap = require('./kmap/kamp');
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
@@ -9,8 +10,16 @@ const nunjucks = require("nunjucks");
 nunjucks.configure('views', {express: app});
 
 app.get('/', (req, res) => {
-    res.send("Hello world");
+    res.render("calc.html");
 });
+
+app.post('/', (req, res) => {
+    let n = req.body.n;
+    let mins = req.body.mins;
+    let dcs = req.body.dcs;
+    let sol = kmap.solve(n, mins, dcs);
+    res.json(sol);
+})
 
 const PORT = 3000;
 app.listen(PORT, (e) => {
