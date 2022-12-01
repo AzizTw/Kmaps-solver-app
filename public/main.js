@@ -19,7 +19,6 @@ function getKmapInput(arr) {
         v = arr[i];
         if (v === '1')
             mins.push(i);
-
         else if (v === 'X')
             dcs.push(i);
     }
