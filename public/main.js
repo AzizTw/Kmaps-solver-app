@@ -49,15 +49,16 @@ function showSolution(sol) {
 
     let li;
     li = document.createElement("li")
+    li.textContent = "EPIs: ";
     if (sol.epis.length !== 0)
-        li.textContent = sol.epis.join(", ");
+        li.textContent += sol.epis.join(", ");
     else
-        li.textContent = "There are no essential prime implicants";
+        li.textContent += "There are no essential prime implicants";
 
     ul.appendChild(li)
 
     li = document.createElement("li")
-    li.textContent = sol.pis.join(", ");
+    li.innerHTML = "PIs: &nbsp;" + sol.pis.join(", ");
     ul.appendChild(li)
 
     li = document.createElement("li")
