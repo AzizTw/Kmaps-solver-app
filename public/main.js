@@ -27,6 +27,19 @@ function getKmapInput(arr) {
     return {mins, dcs, n};
 }
 
+async function getSolution(input) {
+    let url = "/calc" // TODO: might need to change for practice mode
+    let res = await fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(input)
+    });
+
+    return res.body.solution;
+}
+
 function solve(cells) { // cells ia nodelist of divs
     let vals = Array.from(cells).map((c) => c.innerHTML);
     let input = getKmapInput(vals);
