@@ -278,12 +278,5 @@ function solve(n, mins, dcs) {
 }
 
 module.exports = {
-    union, // TODO: remove
-    get_pis,
-    get_epis,
-    get_all_min_sop_forms,
-    translate_implicant,
-    to_binary,
-    get_cov_dicts,
     solve
 };
