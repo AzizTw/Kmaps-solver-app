@@ -115,17 +115,17 @@ function is_covered(min, imp) {
     let z = zip(min, imp);
     let imp_bit;
     let min_bit;
-    for (let i = 0; i < z.lenght; i++) {
-        min_bit = z[i][0];
-        imp_bit = z[i][1];
+
+    for (let pair of z) {
+        min_bit = pair[0];
+        imp_bit = pair[1];
         if (imp_bit === "-")
             continue;
         else if (imp_bit !== min_bit) {
-            iscov = false;
-            break;
+            return false;
         }
     }
-    return iscov;
+    return true;
 }
 
     // we don't have dicts in python, so we're using objects
@@ -155,6 +155,7 @@ function get_cov_dicts(pis, mins) {
     //         }
     //     }
     // }
+    // console.log(min_to_imps)
     let cov = {imp_to_mins, min_to_imps};
     return cov;
 }
@@ -193,9 +194,11 @@ function get_pis(mins_dcs, n) {
 function get_epis(min_to_imps) {
     let epis = new Set();
 
-    for (const [min, pi] of Object.entries(min_to_imps)) {
-        if (pi.length === 1)
-            epis = union(pi, prime_implicants);
+    let pis;
+    for (let min in min_to_imps) {
+        pis = min_to_imps[min];
+        if (pis.size === 1)
+            epis = union(epis, pis);
     }
 
     return epis;
@@ -214,51 +217,52 @@ function is_covering_all_minterms(mins, possible_min_sop) {
 }
 
 function get_all_min_sop_forms(mins, imp_to_mins, epis) {
-    let mins_notcov = mins.map((min) => min) // copy
-    let i;
-    for (let epi of epis) {
-        for (let min of imp_to_mins[epi]) {
-            if (mins_notcov.includes(min)) {
-                i = mins_notcov.indexOf(min); // js is stupid
-                mins_notcov.splice(i, 1);
-            }
-        }
-    }
+    // let mins_notcov = new Set(Array.from(mins).map((min) => min)) // copy
+    // console.log(epis)
+    // let i;
+    // for (let epi of epis) {
+    //     for (let min of imp_to_mins[epi]) {
+    //         if (mins_notcov.includes(min)) {
+    //             i = mins_notcov.indexOf(min); // js is stupid
+    //             mins_notcov.splice(i, 1);
+    //         }
+    //     }
+    // }
 
-    if (mins_notcov.length === 0) {
-        return Array.from(epis)
-    }
+    // if (mins_notcov.length === 0) {
+    //     return Array.from(epis)
+    // }
 
-    let uimp = new Set();
-    for (let min of mins_notcov) {
-        for (pi of this.min_to_imps[min]) {
-            uimp.add(pi);
-        }
-    }
+    // let uimp = new Set();
+    // for (let min of mins_notcov) {
+    //     for (pi of this.min_to_imps[min]) {
+    //         uimp.add(pi);
+    //     }
+    // }
 
-    let combos = [];
-    let perms;
-    for (let i = 1; i < mins_notcov+1; i++) {
-        perms = getPermutations(uimp, i);
-        combos.push(... perms);
-    }
+    // let combos = [];
+    // let perms;
+    // for (let i = 1; i < mins_notcov+1; i++) {
+    //     perms = getPermutations(uimp, i);
+    //     combos.push(... perms);
+    // }
 
-        let sops = [];
-        let len = 0;
-        let s;
-        for (c of combos) {
-            s = Array.from(epi);
-            s.push(... c);
-            if (is_covering_all_minterms(s)) {
-                if (len === 0) {
-                    len = count_literals(s);
-                    sops.push(s);
-                }
-                else if(count_literals(s) === len)
-                    sops.append(s);
-            }
-        }
-        return sops;
+    //     let sops = [];
+    //     let len = 0;
+    //     let s;
+    //     for (c of combos) {
+    //         s = Array.from(epi);
+    //         s.push(... c);
+    //         if (is_covering_all_minterms(s)) {
+    //             if (len === 0) {
+    //                 len = count_literals(s);
+    //                 sops.push(s);
+    //             }
+    //             else if(count_literals(s) === len)
+    //                 sops.append(s);
+    //         }
+    //     }
+    //     return sops;
     }
 
 module.exports = {
