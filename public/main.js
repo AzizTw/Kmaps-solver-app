@@ -16,18 +16,18 @@ kmapPattern(3) = [0, 1, 3, 2,
  */
 function kmapPattern(num_vars) {
     
-    const RowsCount = 2 ** Math.floor(num_vars / 2);
-    const ColumnsCount = 2 ** Math.floor((num_vars + 1) / 2);
+    const ROWS_COUNT = 2 ** Math.floor(num_vars / 2);
+    const COLUMNS_COUNT = 2 ** Math.floor((num_vars + 1) / 2);
     
     // The rows in the kmap gray-coded, ex: [00, 01, 11, 10]
     let rows = [];
-    for (let i = 0; i < RowsCount; i++) {
+    for (let i = 0; i < ROWS_COUNT; i++) {
         rows.push(toGray(i));
     }
     
     // The columns in the kmap gray-coded, ex: [00, 01, 11, 10]
     let cols = [];
-    for (let j = 0; j < ColumnsCount; j++) {
+    for (let j = 0; j < COLUMNS_COUNT; j++) {
         cols.push(toGray(j));
     }
     
@@ -35,8 +35,8 @@ function kmapPattern(num_vars) {
     for (let row of rows) {
         for (let col of cols) {
             // converts the gray code to binary string then pads it with 0s.
-            let rowPart = row.toString(2).padStart(Math.log2(RowsCount),'0');
-            let colPart = col.toString(2).padStart(Math.log2(ColumnsCount),'0');
+            let rowPart = row.toString(2).padStart(Math.log2(ROWS_COUNT),'0');
+            let colPart = col.toString(2).padStart(Math.log2(COLUMNS_COUNT),'0');
 
             // concatenates the two parts, resulting in a cell in the kmap
             let cell = rowPart + colPart;
