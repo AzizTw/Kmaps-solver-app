@@ -4,10 +4,9 @@
     margin: 0;
 }
 
-
 body {
     margin: 0 auto;
-    max-width: 50vw;
+    /* max-width: 80vw; */
     text-align: center;
     background-color: #f0fff0; /* pure white hurts eyes */
 }
@@ -46,32 +45,87 @@ body {
 #solutionBox {
     text-align: left;
     display: none;
-}
-
-
-#solutionBox > ul {
-    display: flex;
-    list-style: none;
-    align-items: stretch;
-    justify-content: left;
-    background-color: #458588;
-    gap: 0px;
-}
-
-#solutionBox > ul > li {
-    flex: 1 1 0px;
-    display: block;
+    /* max-width: 100%; */
+    /* width: auto; */
+    background-color: #689d6a;
     color: lightgray;
-    background-color: #282828;
-    border: 5px #689d6a solid;
+}
+
+#solutionBox ul {
+    list-style: none;
+}
+
+#solutionBox ul.main > li {
+    display: block;
+    border: solid;
+}
+
+#solutionBox ul.main > li > div.legend {
+    display: inline-block;
+    width: 10%;
+    /* margin-right: 10px; */
+    /* margin-top: 5px; */
+    /* margin-bottom: 5px; */
+    background-color: #f9f5d7;
+    color: black;
     padding: 10px;
     text-align: center;
 }
 
-#solutionBox > ul > li:first-child {
-    background-color: yellow;
-    position: relative;
-    top: 0;
-    left: 0;
-    right: 0;
+#solutionBox ul.sub {
+    display: inline-flex;
+    justify-content: center;
+    /* align-items: stretch; */
+    /* border: solid blue; */
 }
+
+
+#solutionBox ul.sub > li {
+    background-color: #282828;
+    margin: 2px;
+    padding: 10px;
+    border: solid;
+}
+
+/* #solutionBox ul > li { */
+/*     display: inline-block; */
+/*     margin: 5px; */
+/*     flex-wrap: nowrap; */
+/*     align-items: stretch; */
+/*     justify-content: center; */
+/* } */
+
+/* #solutionBox ul.sub > li { */
+/*     border: solid blue; */
+/*     margin: 2px; */
+/*     display: inline-flex; */
+/* } */
+
+/* /1* #solutionBox > ul > li > ul { *1/ */
+/* /1*     border: solid blue; *1/ */
+/* /1*     display: flex; *1/ */
+/* /1* } *1/ */
+
+/* /1* #solutionBox > ul > ul { *1/ */
+/* /1*     display: flex; *1/ */
+/* /1*     list-style: none; *1/ */
+/* /1*     align-items: stretch; *1/ */
+/* /1*     justify-content: left; *1/ */
+/* /1*     background-color: #458588; *1/ */
+/* /1*     gap: 0px; *1/ */
+/* /1* } *1/ */
+
+/* /1* /2* #solutionBox > ul > li:first-child { *2/ *1/ */
+/* /1* /2*     background-color: lightgray; *2/ *1/ */
+/* /1* /2* } *2/ *1/ */
+
+/* /1* #solutionBox > ul > li { *1/ */
+/* /1*     flex: 1 1 0px; *1/ */
+/* /1*     display: block; *1/ */
+/* /1*     color: lightgray; *1/ */
+/* /1*     background-color: #282828; *1/ */
+/* /1*     border: 5px #689d6a solid; *1/ */
+/* /1*     padding: 10px; *1/ */
+/* /1*     text-align: center; *1/ */
+/* /1* } *1/ */
+/* >>>>>>> Stashed changes */
