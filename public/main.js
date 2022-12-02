@@ -115,13 +115,17 @@ function showSolution(sol) {
     liPis.innerHTML = "<div class='legend'>PIs &nbsp;</div>";
     liSops.innerHTML = "<div class='legend'>Sops</div>";
 
-    liEpis.appendChild(createList(sol.epis, "sub")); // note if sol.epis is empty we create an empty list
+    if (sol.epis.length !== 0)
+        liEpis.appendChild(createList(sol.epis, "sub"));
+
     liPis.appendChild(createList(sol.pis, "sub"));
 
-    // make sops look human readable before appending
-    for (let i = 0; i < sol.sops.length; i++)
-        sol.sops[i] = sol.sops[i].join(" + ");
-    liSops.appendChild(createList(sol.sops, "sub"));
+    if (sol.sops[0].length !== 0) { // if we have one sop at least
+        // make sops look human readable before appending
+        for (let i = 0; i < sol.sops.length; i++)
+            sol.sops[i] = sol.sops[i].join(" + ");
+        liSops.appendChild(createList(sol.sops, "sub"));
+    }
 
     // main <ul>
     let ul = document.createElement("ul");
