@@ -145,7 +145,6 @@ function solve(cells) { // cells ia nodelist of divs
 }
 
 function resetKmap(cells) {
-    
     // clear the cells
     for (let c of cells) {
         c.innerHTML = "&nbsp;";
