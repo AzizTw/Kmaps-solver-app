@@ -144,6 +144,19 @@ function solve(cells) { // cells ia nodelist of divs
     getSolution(input).then((sol) => showSolution(sol));
 }
 
+function resetKmap(cells) {
+    
+    // clear the cells
+    for (let c of cells) {
+        c.innerHTML = "&nbsp;";
+    }
+
+    // clear the solution box, idk if this is the best way to do it
+    let solbox = document.getElementById("solutionBox");
+    solbox.innerHTML = " ";
+    solbox.style.display = "none";
+}
+
 function main() {
     let cells = document.querySelectorAll(".kmap > .cell");
     for (let c of cells)
@@ -152,6 +165,9 @@ function main() {
     let solveBtn = document.getElementById("solveBtn");
     // solveBtn.addEventListener('click', parseKmap(Array.from(cells).map((c) => c.innerHTML)));
     solveBtn.addEventListener('click', () => solve(cells));
+
+    let resetBtn = document.getElementById("resetBtn");
+    resetBtn.addEventListener('click', () => resetKmap(cells));
 
 }
 
