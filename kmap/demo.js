@@ -1,8 +1,8 @@
 const k = require("./kamp");
 
 let n = 4;
-let mins = [0, 1, 2, 3, 4];
-let dcs = [8, 9, 10, 11];
+let mins = [0b0000, 0b0111, 0b1101, 0b1000];
+let dcs = [0b0100, 0b0101, 0b0010];
 let res = k.solve(n, mins, dcs);
 console.log(res);
 
