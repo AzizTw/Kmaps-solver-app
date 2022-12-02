@@ -111,9 +111,9 @@ function showSolution(sol) {
     let liEpis = document.createElement("li");
     let liPis = document.createElement("li");
     let liSops = document.createElement("li");
-    liEpis.textContent = "EPIS: ";
-    liPis.textContent = "PIs: ";
-    liSops.textContent = "Sops: ";
+    liEpis.innerHTML = "<div class='legend'>EPIs</div>";
+    liPis.innerHTML = "<div class='legend'>PIs</div>";
+    liSops.innerHTML = "<div class='legend'>Sops</div>";
 
     liEpis.appendChild(createList(sol.epis, "sub")); // note if sol.epis is empty we create an empty list
     liPis.appendChild(createList(sol.pis, "sub"));
@@ -131,7 +131,7 @@ function showSolution(sol) {
     ul.appendChild(liSops);
 
     solbox.appendChild(ul);
-    solbox.style.display = "block";
+    solbox.style.display = "inline-block";
 }
 
 function solve(cells) { // cells ia nodelist of divs
