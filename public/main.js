@@ -45,6 +45,7 @@ function kmapPattern(num_vars) {
             kmap.push(parseInt(cell, 2));
         }
     }
+
     return kmap;
 }
 
