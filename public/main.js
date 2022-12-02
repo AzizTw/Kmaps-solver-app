@@ -159,11 +159,14 @@ function resetKmap(cells) {
 function main() {
     let cells = document.querySelectorAll(".kmap > .cell");
     for (let c of cells)
-        c.addEventListener('click', () => c.innerHTML = nextValue(c.innerHTML));
+        c.addEventListener('click', () => {
+            c.innerHTML = nextValue(c.innerHTML)
+            solve(cells);
+        });
 
-    let solveBtn = document.getElementById("solveBtn");
+    // let solveBtn = document.getElementById("solveBtn");
     // solveBtn.addEventListener('click', parseKmap(Array.from(cells).map((c) => c.innerHTML)));
-    solveBtn.addEventListener('click', () => solve(cells));
+    // solveBtn.addEventListener('click', () => solve(cells));
 
     let resetBtn = document.getElementById("resetBtn");
     resetBtn.addEventListener('click', () => resetKmap(cells));
