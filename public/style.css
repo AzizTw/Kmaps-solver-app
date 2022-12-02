@@ -13,8 +13,8 @@ body {
 
 .kmap {
     padding: 10px;
+    max-width: 20vw;
     margin: 0 auto;
-    width: 50%;
     display: grid;
     gap: 10px;
     grid-template-columns: 1fr 1fr 1fr 1fr;
