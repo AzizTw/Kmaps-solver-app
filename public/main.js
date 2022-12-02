@@ -103,6 +103,13 @@ function createList(content, className) {
     return ul;
 }
 
+function clearSolution() {
+    // clear the solution box, idk if this is the best way to do it
+    let solbox = document.getElementById("solutionBox");
+    solbox.innerHTML = " ";
+    solbox.style.display = "none";
+}
+
 function showSolution(sol) {
     let solbox = document.getElementById("solutionBox");
     solbox.innerHTML = " "; // clear
@@ -138,22 +145,28 @@ function showSolution(sol) {
     solbox.style.display = "inline-block";
 }
 
+// check if the input is valid. A valid input is input that contains at least
+// one minterm
+function isValidInput(input) {
+    return input.mins.length !== 0
+}
+
 function solve(cells) { // cells ia nodelist of divs
     let vals = Array.from(cells).map((c) => c.innerHTML);
     let input = getKmapInput(vals);
-    getSolution(input).then((sol) => showSolution(sol));
+
+    if (!isValidInput(input))
+        clearSolution();
+    else
+        getSolution(input).then((sol) => showSolution(sol));
 }
 
 function resetKmap(cells) {
     // clear the cells
-    for (let c of cells) {
+    for (let c of cells)
         c.innerHTML = "&nbsp;";
-    }
 
-    // clear the solution box, idk if this is the best way to do it
-    let solbox = document.getElementById("solutionBox");
-    solbox.innerHTML = " ";
-    solbox.style.display = "none";
+    clearSolution();
 }
 
 function main() {
