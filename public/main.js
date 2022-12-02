@@ -87,15 +87,15 @@ async function getSolution(input) {
     return await res.json();
 }
 
-function createList(title, content) {
+// returns a new <ul> element with class name of className (optional) populated with <li>
+// items containing each element of the content array
+function createList(content, className) {
     let ul = document.createElement("ul");
-    let li;
-    li = document.createElement("li");
-    li.textContent = title;
-    ul.appendChild(li);
+    if (className)
+        ul.className = className;
 
     for (let c of content) {
-        li = document.createElement("li");
+        let li = document.createElement("li");
         li.textContent = c;
         ul.appendChild(li);
     }
@@ -105,20 +105,32 @@ function createList(title, content) {
 
 function showSolution(sol) {
     let solbox = document.getElementById("solutionBox");
-    solbox.innerHTML = " ";
+    solbox.innerHTML = " "; // clear
 
-    if (sol.epis !== 0)
-        solbox.appendChild(createList("EPIs: ", sol.epis));
-    // else TODO: should we really do nothing?
+    // A <li> for each sub solution
+    let liEpis = document.createElement("li");
+    let liPis = document.createElement("li");
+    let liSops = document.createElement("li");
+    liEpis.textContent = "EPIS: ";
+    liPis.textContent = "PIs: ";
+    liSops.textContent = "Sops: ";
 
-    solbox.appendChild(createList("PIs: ", sol.pis));
+    liEpis.appendChild(createList(sol.epis, "sub")); // note if sol.epis is empty we create an empty list
+    liPis.appendChild(createList(sol.pis, "sub"));
 
-    // make sops look human readable
+    // make sops look human readable before appending
     for (let i = 0; i < sol.sops.length; i++)
         sol.sops[i] = sol.sops[i].join(" + ");
+    liSops.appendChild(createList(sol.sops, "sub"));
 
-    solbox.appendChild(createList("SOPs: ", sol.sops));
+    // main <ul>
+    let ul = document.createElement("ul");
+    ul.className = "main";
+    ul.appendChild(liEpis);
+    ul.appendChild(liPis);
+    ul.appendChild(liSops);
 
+    solbox.appendChild(ul);
     solbox.style.display = "block";
 }
 
