@@ -112,7 +112,7 @@ function showSolution(sol) {
     let liPis = document.createElement("li");
     let liSops = document.createElement("li");
     liEpis.innerHTML = "<div class='legend'>EPIs</div>";
-    liPis.innerHTML = "<div class='legend'>PIs</div>";
+    liPis.innerHTML = "<div class='legend'>PIs &nbsp;</div>";
     liSops.innerHTML = "<div class='legend'>Sops</div>";
 
     liEpis.appendChild(createList(sol.epis, "sub")); // note if sol.epis is empty we create an empty list
