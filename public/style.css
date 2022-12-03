@@ -23,6 +23,8 @@ body {
 }
 
 .kmap > .cell {
+    min-width: 1em;
+    max-height: 1em;
     height: 100%;
     width: 100%;
     justify-content: center;
