@@ -238,6 +238,7 @@ function main() {
     // set up select
     state.select.addEventListener('change', () => {
         state.setN(parseInt(state.select.value));
+        clearSolution();
         resizeKmap(state.n);
     });
 
