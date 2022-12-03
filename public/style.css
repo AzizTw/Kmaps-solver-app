@@ -17,7 +17,7 @@ body {
     margin: 0 auto;
     display: grid;
     gap: 10px;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     background-color: #689d6a;
     border: #83a598 5px solid;
 
