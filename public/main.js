@@ -1,5 +1,27 @@
 const VALUES = ['&nbsp;', '1', 'X'];
 const LENGTH = 3;
+let state;
+
+class State {
+    constructor() {
+        this.kmap = document.querySelector('.kmap');
+        this.select = document.getElementById('kmapSize')
+        this.solbox = document.getElementById("solutionBox");
+
+        this.setN(parseInt(this.select.value));
+    }
+
+    setN(n) {
+        this.n = n;
+        let dim = kmapDim(this.n);
+        this.nRows = dim.rows;
+        this.nCols = dim.columns;
+    }
+
+    getCells() {
+        return this.kmap.children;
+    }
+}
 
 function nextValue(val) {
     return VALUES[(VALUES.indexOf(val)+1) % LENGTH]
@@ -19,16 +41,12 @@ function kmapDim(num_vars) {
 }
 
 /*
-Given the number of variables, it returns an array of
+Given the number of rows and columns, it returns an array of
 cells in the kmap ordered by gray code.
 kmapPattern(3) = [0, 1, 3, 2,
                   4, 5, 7, 6]
  */
-function kmapPattern(num_vars) {
-
-    let dim = kmapDim(num_vars);
-    let rows_count = dim.rows;
-    let columns_count = dim.columns;
+function kmapPattern(rows_count, columns_count) {
 
     // The rows in the kmap gray-coded, ex: [00, 01, 11, 10]
     let rows = [];
@@ -42,7 +60,7 @@ function kmapPattern(num_vars) {
         cols.push(toGray(j));
     }
 
-    let kmap = [];
+    let pattern = [];
     for (let row of rows) {
         for (let col of cols) {
             // converts the gray code to binary string then pads it with 0s.
@@ -52,23 +70,27 @@ function kmapPattern(num_vars) {
             // concatenates the two parts, resulting in a cell in the kmap
             let cell = rowPart + colPart;
             // push the cell to the kmap after converting it to integer
-            kmap.push(parseInt(cell, 2));
+            pattern.push(parseInt(cell, 2));
         }
     }
 
-    return kmap;
+    return pattern;
+}
+
+function getN() {
+    let select = document.getElementById('kmapSize');
+    return parseInt(select.value);
 }
 
 // Given an array of values, it returns an object containing:
 // - number of variables
 // - minterms
 // - dontcares
-function getKmapInput(arr) {
+function getKmapInput(arr, n) {
     let mins = [];
     let dcs = []; // dont_cares
-    let n = 4; // TODO: hardcoded to 4 for now
 
-    let pattern = kmapPattern(n);
+    let pattern = kmapPattern(state.nRows, state.nCols);
 
     let v;
     for (let i = 0; i < arr.length; i++) {
@@ -115,13 +137,13 @@ function createList(content, className) {
 
 function clearSolution() {
     // clear the solution box, idk if this is the best way to do it
-    let solbox = document.getElementById("solutionBox");
+    let solbox = state.solbox;
     solbox.innerHTML = " ";
     solbox.style.display = "none";
 }
 
 function showSolution(sol) {
-    let solbox = document.getElementById("solutionBox");
+    let solbox = state.solbox;
     solbox.innerHTML = " "; // clear
 
     // A <li> for each sub solution
@@ -161,9 +183,10 @@ function isValidInput(input) {
     return input.mins.length !== 0
 }
 
-function solve(cells) { // cells ia nodelist of divs
-    let vals = Array.from(cells).map((c) => c.innerHTML);
-    let input = getKmapInput(vals);
+function solve() { // cells ia nodelist of divs
+
+    let vals = Array.from(state.getCells()).map((c) => c.innerHTML);
+    let input = getKmapInput(vals, state.n);
 
     if (!isValidInput(input))
         clearSolution();
@@ -171,29 +194,56 @@ function solve(cells) { // cells ia nodelist of divs
         getSolution(input).then((sol) => showSolution(sol));
 }
 
-function resetKmap(cells) {
+function resetKmap() {
     // clear the cells
-    for (let c of cells)
+    for (let c of state.getCells())
         c.innerHTML = "&nbsp;";
 
     clearSolution();
 }
 
+function activateCell(c) {
+    c.addEventListener('click', () => {
+        c.innerHTML = nextValue(c.innerHTML);
+        solve();
+    })
+}
+
+function createCell(value) {
+    let cell = document.createElement("div");
+    cell.className = "cell";
+    cell.innerHTML = value;
+    activateCell(cell);
+    return cell;
+}
+
+function resizeKmap(n) { // n is the number of variables
+    let kmap = state.kmap;
+    kmap.innerHTML = ""; // empty out kmap
+
+    let nCells = 2**n;
+    for (let i = 0; i < nCells; i++)
+        kmap.appendChild(createCell('&nbsp;'));
+
+    kmap.style.gridTemplateColumns = `repeat(${state.nCols}, 1fr)`;
+}
+
 function main() {
-    let cells = document.querySelectorAll(".kmap > .cell");
-    for (let c of cells)
-        c.addEventListener('click', () => {
-            c.innerHTML = nextValue(c.innerHTML)
-            solve(cells);
-        });
+    state = new State();
 
-    // let solveBtn = document.getElementById("solveBtn");
-    // solveBtn.addEventListener('click', parseKmap(Array.from(cells).map((c) => c.innerHTML)));
-    // solveBtn.addEventListener('click', () => solve(cells));
+    // activate cells
+    for (let c of state.getCells())
+        activateCell(c);
 
+    // set up select
+    state.select.addEventListener('change', () => {
+        state.setN(parseInt(state.select.value));
+        resizeKmap(state.n);
+    });
+
+    // setup resetBtn
     let resetBtn = document.getElementById("resetBtn");
-    resetBtn.addEventListener('click', () => resetKmap(cells));
-
+    resetBtn.addEventListener('click', () => resetKmap(state.getCells()));
 }
 
 main();
