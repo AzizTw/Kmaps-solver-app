@@ -1,3 +1,13 @@
+# How to run
+
+Make sure you install node and git first, then run the following
+
+```
+git clone https://github.com/AzizTw/Kmaps-solver-app
+cd Kmaps-solver-app
+npm install
+```
+
 Essential things we still did not implement:
 
 - [ ] Taking input from minterms separated by commas
