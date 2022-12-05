@@ -109,7 +109,6 @@ function isValidInput(input) {
 }
 
 function solve() { // cells ia nodelist of divs
-
     let vals = Array.from(state.getCells()).map((c) => c.innerHTML);
     let input = getKmapInput(vals, state.n);
 
