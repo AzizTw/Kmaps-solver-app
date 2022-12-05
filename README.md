@@ -8,6 +8,8 @@ cd Kmaps-solver-app
 npm install
 ```
 
+Then run `node app.js` to start the server which you can access at <http://localhost:3000>
+
 # Project structure
 
 ```
