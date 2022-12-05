@@ -26,6 +26,9 @@ app.get('practice/id', (req, res) => {
 });
 */
 
+// In the future we'll use this to list all possible kmaps and allow the user
+// to select from them, but now lets just implement basic practice feature on
+// the Kmap hard coded in practice.html
 app.get('/practice', (req, res) => {
     res.render("practice.html");
 });
