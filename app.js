@@ -13,6 +13,23 @@ app.get('/', (req, res) => {
     res.render("calc.html");
 });
 
+// some pesudo code. We'll do this later
+/*
+app.get('practice/id', (req, res) => {
+    kmap = getKmapById(id); // sql will do this
+    n = kmap.n;
+    mins = kmap.mins;
+    dcs = kmaps.dcs;
+    let data = {n, mins, dcs};
+    res.send(data)
+    res.render("practice.html");
+});
+*/
+
+app.get('/practice', (req, res) => {
+    res.render("practice.html");
+});
+
 app.post('/', (req, res) => {
     let n = req.body.n;
     let mins = req.body.mins;
