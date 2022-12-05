@@ -53,4 +53,4 @@ Essential things we still did not implement:
     - We'll later link this with practice mode.
 
 - [x] nxn (finished)
-- [ ] Labelling the K-Map
+- [ ] Labelling the K-Map (somewhat finished)
