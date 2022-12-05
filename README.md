@@ -14,17 +14,17 @@ Then run `node app.js` to start the server which you can access at <http://local
 
 ```
 .
-├── README.md # this file
-├── app.js # The server. It basically routes urls
-├── kmap # the backend. We basically don't need to touch it anymore
-│   ├── demo.js # test driving the backend.
-│   └── kamp.js # list of functions that solve a Kmap
-├── package.json # ignore this
-├── public # the frontend. We mostly need to work on this
-│   ├── main.js # the frontend javascript
-│   └── style.css # the styles
-└── views # here we store the html files.
-    └── calc.html # this is the calculator mode. It's basically done. We'll add practice mode later
+├── README.md		# this file
+├── app.js		# The server. It basically routes urls
+├── kmap		# the backend. We basically don't need to touch it anymore
+│   ├── demo.js		# test driving the backend.
+│   └── kamp.js		# list of functions that solve a Kmap
+├── package.json	# ignore this
+├── public		# the frontend. We mostly need to work on this
+│   ├── main.js		# the frontend javascript
+│   └── style.css	# the styles
+└── views		# here we store the html files.
+    └── calc.html	# this is the calculator mode. It's basically done. We'll add practice mode later
 ```
 
 
