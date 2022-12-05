@@ -123,7 +123,7 @@ function resetKmap() {
     for (let c of state.getCells())
         c.innerHTML = "&nbsp;";
 
-    clearSolution();
+    clearSolution(state.solbox);
 }
 
 function activateCell(c) {
