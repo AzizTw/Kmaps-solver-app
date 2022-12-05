@@ -142,8 +142,7 @@ function clearSolution() {
     solbox.style.display = "none";
 }
 
-function showSolution(sol) {
-    let solbox = state.solbox;
+function showSolution(sol, solbox) {
     solbox.innerHTML = " "; // clear
 
     // A <li> for each sub solution
@@ -191,7 +190,7 @@ function solve() { // cells ia nodelist of divs
     if (!isValidInput(input))
         clearSolution();
     else
-        getSolution(input).then((sol) => showSolution(sol));
+        getSolution(input).then((sol) => showSolution(sol, state.solbox));
 }
 
 function resetKmap() {
