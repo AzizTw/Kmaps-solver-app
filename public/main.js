@@ -79,11 +79,6 @@ function kmapPattern(rows_count, columns_count) {
     return pattern;
 }
 
-function getN() {
-    let select = document.getElementById('kmapSize');
-    return parseInt(select.value);
-}
-
 // Given an array of values, it returns an object containing:
 // - number of variables
 // - minterms
