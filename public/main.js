@@ -25,6 +25,22 @@ class State {
     }
 }
 
+function cell_labelling() {
+    let kmap = document.querySelector('.kmap');
+    let cells = kmap.children;
+
+    console.log(cells)
+
+    let pattern = kmapPattern(state.nRows, state.nCols);
+
+    let i = 0;
+    for (let cell of cells) {
+        cell.children[0].innerHTML = pattern[i];
+        console.log(cell.children[0])
+        i++;
+    }
+}
+
 function nextValue(val) {
     return VALUES[(VALUES.indexOf(val)+1) % LENGTH]
 }
@@ -135,8 +151,11 @@ function activateCell(c) {
 
 function createCell(value) {
     let cell = document.createElement("div");
+    let label = document.createElement("span");
     cell.className = "cell";
     cell.innerHTML = value;
+    label.className = "cell-label";
+    cell.appendChild(label);
     activateCell(cell);
     return cell;
 }
@@ -159,16 +178,20 @@ function main() {
     for (let c of state.getCells())
         activateCell(c);
 
+    cell_labelling();
+    
     // set up select
     state.select.addEventListener('change', () => {
         state.setN(parseInt(state.select.value));
         clearSolution(state.solbox);
         resizeKmap(state.n);
+        cell_labelling();
     });
 
     // setup resetBtn
     let resetBtn = document.getElementById("resetBtn");
     resetBtn.addEventListener('click', () => resetKmap(state.getCells()));
+    
 }
 
 main();

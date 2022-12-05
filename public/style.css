@@ -41,6 +41,7 @@ body {
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
+    position: relative;
 }
 
 ul {
@@ -78,4 +79,11 @@ ul.sub li {
     margin-right: 5px;
     display: inline;
     padding: 5px;
+}
+
+.cell-label {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 0.6em;
 }
