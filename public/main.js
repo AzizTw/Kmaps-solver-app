@@ -25,7 +25,7 @@ class State {
     }
 }
 
-function cell_labelling() {
+function labelCells() {
     let kmap = document.querySelector('.kmap');
     let cells = kmap.children;
 
@@ -35,8 +35,8 @@ function cell_labelling() {
 
     let i = 0;
     for (let cell of cells) {
-        cell.children[0].innerHTML = pattern[i];
-        console.log(cell.children[0])
+        cell.children[1].innerHTML = pattern[i];
+        console.log(cell.children[1])
         i++;
     }
 }
@@ -125,7 +125,7 @@ function isValidInput(input) {
 }
 
 function solve() { // cells ia nodelist of divs
-    let vals = Array.from(state.getCells()).map((c) => c.innerHTML);
+    let vals = Array.from(state.getCells()).map((c) => c.children[0].innerHTML);
     let input = getKmapInput(vals, state.n);
 
     if (!isValidInput(input))
@@ -136,15 +136,18 @@ function solve() { // cells ia nodelist of divs
 
 function resetKmap() {
     // clear the cells
-    for (let c of state.getCells())
-        c.innerHTML = "&nbsp;";
+    for (let c of state.getCells()){
+        c.children[0].innerHTML = '&nbsp;';
+        console.log(c);
+    }
+        
 
     clearSolution(state.solbox);
 }
 
 function activateCell(c) {
     c.addEventListener('click', () => {
-        c.innerHTML = nextValue(c.innerHTML);
+        c.children[0].innerHTML = nextValue(c.children[0].innerHTML);
         solve();
     })
 }
@@ -152,11 +155,16 @@ function activateCell(c) {
 function createCell(value) {
     let cell = document.createElement("div");
     let label = document.createElement("span");
+    let valueSpan = document.createElement("span");
     cell.className = "cell";
-    cell.innerHTML = value;
     label.className = "cell-label";
+    valueSpan.className = "cell-value";
+    valueSpan.innerHTML = value;
+    cell.appendChild(valueSpan);
     cell.appendChild(label);
+    console.log(cell + " created");
     activateCell(cell);
+    
     return cell;
 }
 
@@ -165,8 +173,10 @@ function resizeKmap(n) { // n is the number of variables
     kmap.innerHTML = ""; // empty out kmap
 
     let nCells = 2**n;
-    for (let i = 0; i < nCells; i++)
+    for (let i = 0; i < nCells; i++){
         kmap.appendChild(createCell('&nbsp;'));
+    }
+        
 
     kmap.style.gridTemplateColumns = `repeat(${state.nCols}, 1fr)`;
 }
@@ -175,17 +185,20 @@ function main() {
     state = new State();
 
     // activate cells
-    for (let c of state.getCells())
+    for (let c of state.getCells()){
         activateCell(c);
+        console.log("Cells in main: " + c.innerHTML);
 
-    cell_labelling();
+    }
+        
+    labelCells();
     
     // set up select
     state.select.addEventListener('change', () => {
         state.setN(parseInt(state.select.value));
         clearSolution(state.solbox);
         resizeKmap(state.n);
-        cell_labelling();
+        labelCells();
     });
 
     // setup resetBtn
