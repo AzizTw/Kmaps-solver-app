@@ -54,4 +54,4 @@ Essential things we still did not implement:
 
 - [x] nxn (finished)
 - [x] Labelling the K-Map
-- [] Making the kmap responsive with the labels and cellValues, if we choose vars > 4 it becomes a bit awkward.
+- [ ] Making the kmap responsive with the labels and cellValues, if we choose vars > 4 it becomes a bit awkward.
