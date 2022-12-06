@@ -65,6 +65,8 @@ div.legend {
     padding: 5px;
     color: #282828;
     background-color: #f9f5d7;
+    width: 2em;
+    height: 1em;
 }
 
 ul.sub {
