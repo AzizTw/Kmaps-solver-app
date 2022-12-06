@@ -45,5 +45,5 @@ const PORT = 3000;
 app.listen(PORT, (e) => {
     if (e)
         console.error(e);
-    console.log("listining on localhost:" + PORT);
+    console.log("listening on localhost:" + PORT);
 })
