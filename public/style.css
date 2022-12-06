@@ -18,8 +18,8 @@ body {
     margin: 0 auto;
     gap: 10px;
     grid-template-columns: 1fr 1fr;
-    background-color: #689d6a;
-    border: #83a598 5px solid;
+    background-color: #68889d;
+    border: #839fa5 5px solid;
 }
 
 .kmap > .cell {
@@ -53,7 +53,7 @@ ul {
     margin: 0 auto;
     display: none;
     color: lightgray;
-    background-color: #689d6a;
+    background-color: #68889d;
     padding: 5px;
     border: solid;
 }
