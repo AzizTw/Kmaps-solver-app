@@ -53,4 +53,5 @@ Essential things we still did not implement:
     - We'll later link this with practice mode.
 
 - [x] nxn (finished)
-- [ ] Labelling the K-Map (somewhat finished)
+- [x] Labelling the K-Map
+- [] Making the kmap responsive with the labels and cellValues, if we choose vars > 4 it becomes a bit awkward.
