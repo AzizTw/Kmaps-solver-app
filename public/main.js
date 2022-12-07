@@ -161,9 +161,8 @@ function createCell(value) {
     valueSpan.innerHTML = value;
     cell.appendChild(valueSpan);
     cell.appendChild(label);
-    console.log(cell + " created");
     activateCell(cell);
-    
+
     return cell;
 }
 
@@ -175,7 +174,7 @@ function resizeKmap(n) { // n is the number of variables
     for (let i = 0; i < nCells; i++){
         kmap.appendChild(createCell('&nbsp;'));
     }
-        
+
 
     kmap.style.gridTemplateColumns = `repeat(${state.nCols}, 1fr)`;
 }
@@ -184,26 +183,23 @@ function main() {
     state = new State();
 
     // activate cells
-    for (let c of state.getCells()){
+    for (let c of state.getCells())
         activateCell(c);
-        console.log("Cells in main: " + c.innerHTML);
 
-    }
-        
-    labelCells();
-    
+    labelCells(state.n);
+
     // set up select
     state.select.addEventListener('change', () => {
         state.setN(parseInt(state.select.value));
         clearSolution(state.solbox);
         resizeKmap(state.n);
-        labelCells();
+        labelCells(state.n);
     });
 
     // setup resetBtn
     let resetBtn = document.getElementById("resetBtn");
     resetBtn.addEventListener('click', () => resetKmap(state.getCells()));
-    
+
 }
 
 main();
