@@ -37,8 +37,8 @@ function labelCells(n) {
         i++;
     }
 
-    if (n >= 5)
-        document.querySelectorAll('.cell-label').forEach((label) => label.style.fontSize = "40%")
+    // if (n >= 5)
+    //     document.querySelectorAll('.cell-label').forEach((label) => label.style.fontSize = "40%")
 }
 
 function nextValue(val) {
@@ -153,13 +153,13 @@ function activateCell(c) {
 
 function createCell(value) {
     let cell = document.createElement("div");
-    let label = document.createElement("span");
-    let valueSpan = document.createElement("span");
+    let label = document.createElement("div");
+    let valueDiv = document.createElement("div");
     cell.className = "cell";
     label.className = "cell-label";
-    valueSpan.className = "cell-value";
-    valueSpan.innerHTML = value;
-    cell.appendChild(valueSpan);
+    valueDiv.className = "cell-value";
+    valueDiv.innerHTML = value;
+    cell.appendChild(valueDiv);
     cell.appendChild(label);
     activateCell(cell);
 
