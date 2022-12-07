@@ -161,6 +161,25 @@ function handleFieldsInput() {
         getSolution(input).then((sol) => showSolution(sol, state.solbox));
 }
 
+// filles the kmap with the values from the input fields
+function fillKmap() {
+    let input = getFieldsInput(state.n);
+
+    let cells = state.getCells();
+    let pattern = kmapPattern(state.nRows, state.nCols);
+
+    let i = 0;
+    for (let cell of cells) {
+        if (input.mins.includes(pattern[i]))
+            cell.children[0].innerHTML = '1';
+        else if (input.dcs.includes(pattern[i]))
+            cell.children[0].innerHTML = 'X';
+        else
+            cell.children[0].innerHTML = '&nbsp;';
+        i++;
+    }
+}
+
 function resetKmap() {
     // clear the cells
     for (let c of state.getCells()){
@@ -221,13 +240,21 @@ function main() {
         clearSolution(state.solbox);
         resizeKmap(state.n);
         labelCells(state.n);
-
+        fillKmap();
         handleFieldsInput(state.n);
     });
 
-    // set up fields
-    state.minsInput.addEventListener('input', handleFieldsInput);
-    state.dcsInput.addEventListener('input', handleFieldsInput);
+    // set up fields (maybe I can combine them into one event listener)
+    state.minsInput.addEventListener('input', () => {
+        clearSolution(state.solbox);
+        handleFieldsInput(state.n);
+        fillKmap();
+    });
+    state.dcsInput.addEventListener('input', () => {
+        clearSolution(state.solbox);
+        handleFieldsInput(state.n);
+        fillKmap();
+    });
 
     // setup resetBtn
     let resetBtn = document.getElementById("resetBtn");
