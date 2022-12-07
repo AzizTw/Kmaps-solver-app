@@ -88,4 +88,5 @@ ul.sub li {
     bottom: 0;
     right: 0;
     font-size: 0.6em;
+    /* font-size: 35%; when n is large */
 }

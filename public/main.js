@@ -25,20 +25,20 @@ class State {
     }
 }
 
-function labelCells() {
+function labelCells(n) {
     let kmap = document.querySelector('.kmap');
     let cells = kmap.children;
-
-    console.log(cells)
 
     let pattern = kmapPattern(state.nRows, state.nCols);
 
     let i = 0;
     for (let cell of cells) {
         cell.children[1].innerHTML = pattern[i];
-        console.log(cell.children[1])
         i++;
     }
+
+    if (n >= 5)
+        document.querySelectorAll('.cell-label').forEach((label) => label.style.fontSize = "40%")
 }
 
 function nextValue(val) {
@@ -138,9 +138,8 @@ function resetKmap() {
     // clear the cells
     for (let c of state.getCells()){
         c.children[0].innerHTML = '&nbsp;';
-        console.log(c);
     }
-        
+
 
     clearSolution(state.solbox);
 }
