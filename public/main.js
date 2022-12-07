@@ -10,6 +10,8 @@ class State {
         this.select = document.getElementById('kmapSize')
         this.solbox = document.getElementById("solutionBox");
 
+        this.minsInput = document.getElementById("minterms");
+        this.dcsInput = document.getElementById("dontcares");
         this.setN(parseInt(this.select.value));
     }
 
@@ -118,6 +120,17 @@ function getKmapInput(arr, n) {
     return {mins, dcs, n};
 }
 
+function getFieldsInput(n) {
+
+    let mins = document.getElementById('minterms').value.split(',').map((v) => parseInt(v));
+    let dcs = document.getElementById('dontcares').value.split(',').map((v) => parseInt(v));
+
+    // check if dcs is nan
+    if (isNaN(dcs[0]))
+        dcs = [];
+    return {mins, dcs, n};
+}
+
 // check if the input is valid. A valid input is input that contains at least
 // one minterm
 function isValidInput(input) {
@@ -127,6 +140,20 @@ function isValidInput(input) {
 function solve() { // cells ia nodelist of divs
     let vals = Array.from(state.getCells()).map((c) => c.children[0].innerHTML);
     let input = getKmapInput(vals, state.n);
+
+    // console.log(input)
+
+    if (!isValidInput(input))
+        clearSolution(state.solbox);
+    else
+        getSolution(input).then((sol) => showSolution(sol, state.solbox));
+}
+
+// handles the input from the text fields
+function handleFieldsInput() {
+    let input = getFieldsInput(state.n);
+
+    console.log(input);
 
     if (!isValidInput(input))
         clearSolution(state.solbox);
@@ -194,7 +221,13 @@ function main() {
         clearSolution(state.solbox);
         resizeKmap(state.n);
         labelCells(state.n);
+
+        handleFieldsInput(state.n);
     });
+
+    // set up fields
+    state.minsInput.addEventListener('input', handleFieldsInput);
+    state.dcsInput.addEventListener('input', handleFieldsInput);
 
     // setup resetBtn
     let resetBtn = document.getElementById("resetBtn");
