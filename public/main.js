@@ -177,8 +177,12 @@ function fillFields() {
         i++;
     }
 
-    document.getElementById('minterms').value = mins.join(',');
-    document.getElementById('dontcares').value = dcs.join(',');
+    // sort the minterms and dontcares before they fill the fields (useless ?)
+    mins.sort((a, b) => a - b);
+    dcs.sort((a, b) => a - b);
+
+    document.getElementById('minterms').value = mins.join(', ');
+    document.getElementById('dontcares').value = dcs.join(', ');
 
 }
 
@@ -209,6 +213,10 @@ function resetKmap() {
 
 
     clearSolution(state.solbox);
+
+    // clear the input fields
+    state.minsInput.value = '';
+    state.dcsInput.value = '';
 }
 
 function activateCell(c) {
