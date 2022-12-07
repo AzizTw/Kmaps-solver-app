@@ -44,7 +44,7 @@ function labelCells(n) {
 }
 
 function nextValue(val) {
-    return VALUES[(VALUES.indexOf(val)+1) % LENGTH]
+    return VALUES[(VALUES.indexOf(val)+1) % LENGTH];
 }
 
 function toGray(n) {
@@ -153,12 +153,33 @@ function solve() { // cells ia nodelist of divs
 function handleFieldsInput() {
     let input = getFieldsInput(state.n);
 
-    console.log(input);
 
     if (!isValidInput(input))
         clearSolution(state.solbox);
     else
         getSolution(input).then((sol) => showSolution(sol, state.solbox));
+}
+
+// filles the input fields with the values from the kmap
+function fillFields() {
+    let cells = state.getCells();
+    let pattern = kmapPattern(state.nRows, state.nCols);
+
+    let mins = [];
+    let dcs = [];
+
+    let i = 0;
+    for (let cell of cells) {
+        if (cell.children[0].innerHTML === '1')
+            mins.push(pattern[i]);
+        else if (cell.children[0].innerHTML === 'X')
+            dcs.push(pattern[i]);
+        i++;
+    }
+
+    document.getElementById('minterms').value = mins.join(',');
+    document.getElementById('dontcares').value = dcs.join(',');
+
 }
 
 // filles the kmap with the values from the input fields
@@ -193,6 +214,7 @@ function resetKmap() {
 function activateCell(c) {
     c.addEventListener('click', () => {
         c.children[0].innerHTML = nextValue(c.children[0].innerHTML);
+        fillFields();
         solve();
     })
 }
@@ -249,6 +271,7 @@ function main() {
         clearSolution(state.solbox);
         handleFieldsInput(state.n);
         fillKmap();
+
     });
     state.dcsInput.addEventListener('input', () => {
         clearSolution(state.solbox);
