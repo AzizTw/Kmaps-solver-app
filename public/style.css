@@ -103,3 +103,11 @@ ul.sub li {
     display: inline;
     padding: 5px;
 }
+
+.cross{
+    color: #ff0000;
+}
+
+.check{
+    color: #00ff00;
+}
