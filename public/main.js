@@ -128,6 +128,9 @@ function getFieldsInput(n) {
     // check if dcs is nan
     if (isNaN(dcs[0]))
         dcs = [];
+    if (isNaN(mins[0]))
+        mins = [];
+
     return {mins, dcs, n};
 }
 
