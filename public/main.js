@@ -7,6 +7,7 @@ import {
     labelCells,
     kmapPattern,
     clearInput,
+    fillKmap,
     VALUES,
     LENGTH,
 } from "./utils.js";
@@ -51,7 +52,7 @@ function parseArray(str) {
         return [];
 
     // this regex matches a string of numbers separated by commas, with optional spaces
-    let reg = /^[0-9]+\s*(,\s*[0-9]+)*,?$/; 
+    let reg = /^[0-9]+\s*(,\s*[0-9]+)*,?$/;
     if (!reg.test(str))
         return null;
 
@@ -149,26 +150,6 @@ function fillFields() {
     document.getElementById('minterms').value = mins.join(', ');
     document.getElementById('dontcares').value = dcs.join(', ');
 
-}
-
-// filles the kmap with the values from the input fields
-function fillKmap(input) {
-    if (input === null)
-        return;
-
-    let cells = state.getCells();
-    let pattern = kmapPattern(state.nRows, state.nCols);
-
-    let i = 0;
-    for (let cell of cells) {
-        if (input.mins.includes(pattern[i]))
-            cell.children[0].innerHTML = '1';
-        else if (input.dcs.includes(pattern[i]))
-            cell.children[0].innerHTML = 'X';
-        else
-            cell.children[0].innerHTML = '&nbsp;';
-        i++;
-    }
 }
 
 function resetKmap() {

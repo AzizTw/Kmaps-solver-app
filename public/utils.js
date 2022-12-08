@@ -189,3 +189,25 @@ export function kmapPattern(rows_count, columns_count) {
 
     return pattern;
 }
+
+// filles the kmap with the values from the input fields
+export function fillKmap(input) {
+    if (input === null)
+        return;
+
+    let cells = state.getCells();
+    let pattern = kmapPattern(state.nRows, state.nCols);
+
+    let i = 0;
+    for (let cell of cells) {
+        if (input.mins.includes(pattern[i]))
+            cell.children[0].innerHTML = '1';
+        else if (input.dcs.includes(pattern[i]))
+            cell.children[0].innerHTML = 'X';
+        else
+            cell.children[0].innerHTML = '&nbsp;';
+        i++;
+    }
+}
+
+
