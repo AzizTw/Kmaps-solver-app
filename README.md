@@ -19,9 +19,11 @@ Then run `node app.js` to start the server which you can access at <http://local
 ├── kmap		# the backend. We basically don't need to touch it anymore
 │   ├── demo.js		# test driving the backend.
 │   └── kamp.js		# list of functions that solve a Kmap
-├── package.json	# ignore this
+├── package.json    # ignore this
 ├── public		# the frontend. We mostly need to work on this
-│   ├── main.js		# the frontend javascript
+│   ├── calc.js     # The frontend for calc mode
+│   ├── practice.js # the frontend for practice mode
+│   ├── state.js # a module that contains ``State`` class
 │   └── style.css	# the styles
 └── views		# here we store the html files.
     └── calc.html	# this is the calculator mode. It's basically done. We'll add practice mode later
@@ -37,7 +39,7 @@ Essential things we still did not implement:
     - Make sure you reuse getSolution() from public/main.js
     - Filling the kmap from the input fields and vice versa
 
-- [ ] Practice mode
+- [x] Practice mode
     - Show A non-interactive Kmap
     - Get the solution and store it, but don't display it!
     - Ask the user to enter the solution
@@ -56,3 +58,18 @@ Essential things we still did not implement:
 - [x] nxn (finished)
 - [x] Labelling the K-Map
 - [ ] Making the kmap responsive with the labels and cellValues, if we choose vars > 4 it becomes a bit awkward.
+
+
+Great things to implement:
+
+- [ ] An "About" page, also maybe footer and a header (?) because the website looks bland at the moment.
+    - it has some abbrevieations like EPIS = Essential Prime Implicants
+    - References (to the algorithm for example)
+    - how to use!
+
+- [ ] A cool (and very useful) feature where when you hover over an implicant in the solBox, the minterms that this implicant cover will get highlighted.
+
+- [ ] Labelling the borders of the kmap (A, B, C, D..)
+
+feel free to add more.
+
