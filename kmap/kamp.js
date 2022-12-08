@@ -268,11 +268,11 @@ function solve(n, mins, dcs) {
     let sops = get_all_min_sop_forms(mins, cov.imp_to_mins, cov.min_to_imps, epis);
 
     // we're essentially done, but lets make the output pretty
-    pis  = Array.from(pis).map((e) => translate_implicant(e, n));
-    epis = Array.from(epis).map((e) => translate_implicant(e, n))
+    pis  = Array.from(pis).map((e) => translate_implicant(e, n)).sort();
+    epis = Array.from(epis).map((e) => translate_implicant(e, n)).sort();
 
     for (let i = 0; i < sops.length; i++)
-        sops[i] = sops[i].map((e) => translate_implicant(e, n));
+        sops[i] = sops[i].map((e) => translate_implicant(e, n)).sort();
 
     return {epis, pis, sops};
 }
