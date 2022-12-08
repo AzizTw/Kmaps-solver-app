@@ -24,6 +24,14 @@ function nextValue(val) {
     return VALUES[(VALUES.indexOf(val) + 1) % LENGTH];;
 }
 
+// function activateCell(c) {
+//     c.addEventListener('click', () => {
+//         c.children[0].innerHTML = nextValue(c.children[0].innerHTML);
+//         fillFields();
+//         solve();
+//     })
+// }
+
 function activateCells(state) {
     for (let c of state.getCells())
         c.addEventListener("click", () => {
@@ -33,26 +41,59 @@ function activateCells(state) {
         });
 }
 
-function getFieldsInput(n) {
+// returns an array of numbers from a list of a comma seperated strings
+// If the string is invalid, returns null. If the string is empty
+// returns an emptty array
+function parseArray(str) {
+    str = str.trim(); // remove leading and trailing whitespace
 
-    // TODO: generalize this in a function
-    let mins = minsInput.value.split(',')
-        .map((str) => str.trim())
-        .filter(str => str !== "")
-        .map((v) => parseInt(v));
+    if (str === "")
+        return [];
 
-    let dcs = dcsInput.value.split(',')
-        .map((str) => str.trim())
-        .filter(str => str !== "")
-        .map((v) => parseInt(v));
+    let reg = /^[0-9]+\s*(,\s*[0-9]+)*,?$/; // TODO: explain this
+    if (!reg.test(str))
+        return null;
 
-    return {mins, dcs, n};
+    str = str.replace(/,$/, ""); // remove trailing comma, if any
+    let arr = str.split(",");
+    arr = arr.map((e) => parseInt(e.trim())) // fix cases like 0,   1,   2
+
+    return arr;
 }
 
-// check if the input is valid. A valid input is input that contains at least
-// one minterm
-function isValidInput(input) {
-    return input.mins.length !== 0;
+// Returns a copy of the array that only has unique values.
+function uniquize(arr) {
+    return [... new Set(arr)];
+}
+
+// returns an input object if the user input is input. If input is not valid it
+// will return null.
+function getFieldsInput(n) {
+    let mins;
+    let dcs;
+
+    // attempt to get get arrays
+    if ((mins = parseArray(minsInput.value)) === null)
+        return null;
+
+    if ((dcs = parseArray(dcsInput.value)) === null)
+        return null;
+
+    // remove duplciates
+    mins = uniquize(mins);
+    dcs = uniquize(dcs);
+
+    // check input doesn't exceed limit
+    let limit = 2**n - 1;
+    if (Math.max(...mins) > limit || Math.max(...dcs) > limit)
+        return null;
+
+    // check if a term is repeated in mins and dcs
+    let intersection = mins.filter((min) => dcs.includes(min));
+    if (intersection.length !== 0)
+        return null;
+
+    return {n, mins, dcs};
 }
 
 function solve() {
@@ -62,7 +103,7 @@ function solve() {
 
     // console.log(input)
 
-    if (!isValidInput(input))
+    if (input.mins.length !== 0) // valid kmap
         clearSolution(state.solbox);
     else
         getSolution(input).then((sol) => showSolution(sol, state.solbox));
@@ -72,8 +113,15 @@ function solve() {
 function handleFieldsInput() {
     let input = getFieldsInput(state.n);
 
-    if (!isValidInput(input)) clearSolution(state.solbox);
-    else getSolution(input).then((sol) => showSolution(sol, state.solbox));
+    if (input === null)
+        console.log("bad input bro");
+
+    else if (input.mins.length === 0)
+        clearSolution(state.solbox);
+    else
+        getSolution(input).then((sol) => showSolution(sol, state.solbox));
+
+    return input;
 }
 
 // filles the input fields with the values from the kmap
@@ -103,8 +151,9 @@ function fillFields() {
 }
 
 // filles the kmap with the values from the input fields
-function fillKmap() {
-    let input = getFieldsInput(state.n);
+function fillKmap(input) {
+    if (input === null)
+        return;
 
     let cells = state.getCells();
     let pattern = kmapPattern(state.nRows, state.nCols);
@@ -133,14 +182,6 @@ function resetKmap() {
     dcsInput.value = '';
 }
 
-function activateCell(c) {
-    c.addEventListener('click', () => {
-        c.children[0].innerHTML = nextValue(c.children[0].innerHTML);
-        fillFields();
-        solve();
-    })
-}
-
 function main() {
     state = new State();
 
@@ -162,13 +203,13 @@ function main() {
 
     // set up fields (maybe I can combine them into one event listener)
     minsInput.addEventListener('input', () => {
-        handleFieldsInput(state.n);
-        fillKmap();
+        let input = handleFieldsInput(state.n);
+        fillKmap(input);
 
     });
     dcsInput.addEventListener('input', () => {
-        handleFieldsInput(state.n);
-        fillKmap();
+        let input = handleFieldsInput(state.n);
+        fillKmap(input);
     });
 
     // setup resetBtn
