@@ -32,9 +32,10 @@ Then run `node app.js` to start the server which you can access at <http://local
 
 Essential things we still did not implement:
 
-- [ ] Taking input from minterms separated by commas
+- [x] Taking input from minterms separated by commas
     - Don't forget about input validation
     - Make sure you reuse getSolution() from public/main.js
+    - Filling the kmap from the input fields and vice versa
 
 - [ ] Practice mode
     - Show A non-interactive Kmap
