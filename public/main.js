@@ -186,12 +186,12 @@ function main() {
     // set up fields (maybe I can combine them into one event listener)
     minsInput.addEventListener('input', () => {
         let input = handleFieldsInput(state.n);
-        fillKmap(input);
+        fillKmap(input, state);
 
     });
     dcsInput.addEventListener('input', () => {
         let input = handleFieldsInput(state.n);
-        fillKmap(input);
+        fillKmap(input, state);
     });
 
     // setup resetBtn

@@ -1,5 +1,6 @@
 const express = require('express');
 const kmap = require('./kmap/kamp');
+const sel = require('./data/sel');
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
@@ -29,8 +30,18 @@ app.get('practice/id', (req, res) => {
 // In the future we'll use this to list all possible kmaps and allow the user
 // to select from them, but now lets just implement basic practice feature on
 // the Kmap hard coded in practice.html
-app.get('/practice', (req, res) => {
-    res.render("practice.html");
+app.get('/practice', async (req, res) => {
+    let info = await sel.getAllKmapInfo();
+    res.render("practice.html", {info});
+});
+
+app.post('/practice', async (req, res) => {
+    let id = req.body.id;
+    let query = await sel.getKmapInput(id);
+    let inputStr = query.input;
+    let input = JSON.parse(inputStr);
+    let sol = kmap.solve(input.n, input.mins, input.dcs);
+    res.json({sol, input});
 });
 
 app.post('/', (req, res) => {

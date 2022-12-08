@@ -191,7 +191,7 @@ export function kmapPattern(rows_count, columns_count) {
 }
 
 // filles the kmap with the values from the input fields
-export function fillKmap(input) {
+export function fillKmap(input, state) {
     if (input === null)
         return;
 
