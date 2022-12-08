@@ -55,6 +55,15 @@ function showAnswerResult(answer, id){
     }    
 }
 
+function resetInputs(){
+    nEPIsInput.value = "";
+    nPIsInput.value = "";
+    sopInput.value = "";
+    document.getElementById("nPIsCheck").innerHTML = "";
+    document.getElementById("nEPIsCheck").innerHTML = "";
+    document.getElementById("SOPCheck").innerHTML = "";
+}
+
 function checkSolution(){
     let nEPIs = parseInt(nEPIsInput.value);
     let nPIs = parseInt(nPIsInput.value);
@@ -87,6 +96,7 @@ function main() {
     document.getElementById("randBtn").addEventListener("click", () => {
         randomizeKmap(state);
         storeSolution(state);
+        resetInputs();
     });
 
     document.getElementById("checkBtn").addEventListener("click", () => {
