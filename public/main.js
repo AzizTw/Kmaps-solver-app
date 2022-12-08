@@ -161,13 +161,11 @@ function main() {
 
     // set up fields (maybe I can combine them into one event listener)
     minsInput.addEventListener('input', () => {
-        clearSolution(state.solbox);
         handleFieldsInput(state.n);
         fillKmap();
 
     });
     dcsInput.addEventListener('input', () => {
-        clearSolution(state.solbox);
         handleFieldsInput(state.n);
         fillKmap();
     });
