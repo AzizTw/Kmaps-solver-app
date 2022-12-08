@@ -41,15 +41,6 @@ function solve() {
     else getSolution(input).then((sol) => showSolution(sol, state.solbox));
 }
 
-// Given the num_vars in a kmap, it returns the appropriate number of rows and
-// columns
-function kmapDim(num_vars) {
-    let rows = 2 ** Math.floor(num_vars / 2);
-    let columns = 2 ** Math.floor((num_vars + 1) / 2);
-
-    return { rows, columns };
-}
-
 function resetKmap() {
     // clear the cells
     for (let c of state.getCells()) {
