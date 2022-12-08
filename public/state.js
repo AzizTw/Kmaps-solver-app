@@ -7,13 +7,6 @@ export class State {
         this.setN(parseInt(this.select.value));
     }
 
-    kmapDim(num_vars) {
-        let rows = 2 ** Math.floor(num_vars / 2);
-        let columns = 2 ** Math.floor((num_vars + 1) / 2);
-
-        return { rows, columns };
-    }
-
     setN(n) {
         this.n = n;
         let dim = this.kmapDim(this.n);
@@ -23,5 +16,14 @@ export class State {
 
     getCells() {
         return this.kmap.children;
+    }
+
+    // Given the num_vars in a kmap, it returns the appropriate number of rows and
+    // columns
+    kmapDim(num_vars) {
+        let rows = 2 ** Math.floor(num_vars / 2);
+        let columns = 2 ** Math.floor((num_vars + 1) / 2);
+
+        return { rows, columns };
     }
 }
