@@ -20,6 +20,15 @@ function randomizeKmap(state) {
     cells[randPos].children[0].innerHTML = "1";
 };
 
+// solves the kmap and stores the solution in globalSolution
+function storeSolution(state) {
+    let vals = Array.from(state.getCells()).map((c) => c.children[0].innerHTML);
+    let input = getKmapInput(vals, state); 
+    getSolution(input).then((sol) => {
+        globalSolution = sol;
+        console.log(sol);
+    });
+}
 
 function main() {
     let state = new State();
@@ -34,13 +43,7 @@ function main() {
     });
     document.getElementById("randBtn").addEventListener("click", () => {
         randomizeKmap(state);
-        let vals = Array.from(state.getCells()).map((c) => c.children[0].innerHTML);
-        let input = getKmapInput(vals, state); 
-        // use getSolution() to get the solution
-        getSolution(input).then((sol) => {
-            globalSolution = sol;
-            console.log(sol);
-        });
+        storeSolution(state);
     });
 }
 
