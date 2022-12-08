@@ -1,3 +1,7 @@
+
+export const VALUES = ["&nbsp;", "1", "X"];
+export const LENGTH = 3;
+
 export async function getSolution(input) {
     let url = "/"; // TODO: might need to change for practice mode
     let res = await fetch(url, {
