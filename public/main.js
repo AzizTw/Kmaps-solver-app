@@ -103,7 +103,7 @@ function solve() {
 
     // console.log(input)
 
-    if (input.mins.length !== 0) // valid kmap
+    if (input.mins.length === 0) // valid kmap
         clearSolution(state.solbox);
     else
         getSolution(input).then((sol) => showSolution(sol, state.solbox));
