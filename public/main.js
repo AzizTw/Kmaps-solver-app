@@ -34,15 +34,16 @@ function activateCells(state) {
 
 function getFieldsInput(n) {
 
-    let mins = minsInput.value.split(',').map((v) => parseInt(v));
-    let dcs = dcsInput.value.split(', ').map((v) => parseInt(v));
+    // TODO: generalize this in a function
+    let mins = minsInput.value.split(',')
+        .map((str) => str.trim())
+        .filter(str => str !== "")
+        .map((v) => parseInt(v));
 
-    console.log(mins)
-    // check if dcs is nan
-    if (isNaN(dcs[0]))
-        dcs = [];
-    if (isNaN(mins[0]))
-        mins = [];
+    let dcs = dcsInput.value.split(',')
+        .map((str) => str.trim())
+        .filter(str => str !== "")
+        .map((v) => parseInt(v));
 
     return {mins, dcs, n};
 }
