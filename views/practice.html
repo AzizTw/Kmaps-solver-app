@@ -15,6 +15,13 @@
         <br>
 
         <main>
+            <select id="kmapId" name="kmapId">
+                <option disabled selected value> -- Select a Kmap -- </option>
+                {% for x in info %}
+                <option value="{{x.id}}">{{x.origin}}</option>
+                {% endfor %}
+            </select>
+
             <select id="kmapSize" name="kmapSize">
                 <option value="2">2</option>
                 <option value="3">3</option>

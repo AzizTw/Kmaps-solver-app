@@ -1,5 +1,5 @@
 import { State } from "./state.js";
-import { drawKmap, labelCells, getKmapInput, getSolution, VALUES, LENGTH } from "./utils.js";
+import { drawKmap, labelCells, getKmapInput, getSolution, fillKmap, VALUES, LENGTH } from "./utils.js";
 
 let globalSolution;
 
@@ -27,7 +27,7 @@ function randomizeKmap(state) {
 // solves the kmap and stores the solution in globalSolution
 function storeSolution(state) {
     let vals = Array.from(state.getCells()).map((c) => c.children[0].innerHTML);
-    let input = getKmapInput(vals, state); 
+    let input = getKmapInput(vals, state);
     getSolution(input).then((sol) => {
         globalSolution = sol;
         console.log(sol);
@@ -52,7 +52,7 @@ function showAnswerResult(answer, id){
         result.innerHTML = "&#10008;"
         result.classList.add("cross");
         result.classList.remove("check"); // remove check class if it exists
-    }    
+    }
 }
 
 function resetInputs(){
@@ -82,11 +82,25 @@ function checkSolution(){
     showAnswerResult(sopCorrect, "SOPCheck");
 }
 
+async function requestInput(id) {
+    let url = "/practice";
+    let res = await fetch(url, {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({id}),
+    });
+
+    return await res.json();
+}
+
 function main() {
     let state = new State();
     drawKmap(state);
     labelCells(state);
-    
+
     state.select.addEventListener("change", () => {
         state.setN(parseInt(state.select.value));
         // clearSolution(state.solbox);
@@ -101,6 +115,17 @@ function main() {
 
     document.getElementById("checkBtn").addEventListener("click", () => {
         checkSolution();
+    });
+
+    // <select> for picking a kmap from the database
+    let kmapIdSel = document.getElementById("kmapId");
+    kmapIdSel.addEventListener("change", () => {
+        requestInput(parseInt(kmapIdSel.value)).then((res) => {
+            state.select.value = res.input.n.toString();
+            state.select.dispatchEvent(new Event('change')); // run a change event
+            fillKmap(res.input, state);
+            globalSolution = res.sol;
+        });
     });
 }
 
