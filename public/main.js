@@ -23,6 +23,14 @@ function nextValue(val) {
     return VALUES[(VALUES.indexOf(val) + 1) % LENGTH];;
 }
 
+// function activateCell(c) {
+//     c.addEventListener('click', () => {
+//         c.children[0].innerHTML = nextValue(c.children[0].innerHTML);
+//         fillFields();
+//         solve();
+//     })
+// }
+
 function activateCells(state) {
     for (let c of state.getCells())
         c.addEventListener("click", () => {
@@ -171,14 +179,6 @@ function resetKmap() {
 
     minsInput.value = '';
     dcsInput.value = '';
-}
-
-function activateCell(c) {
-    c.addEventListener('click', () => {
-        c.children[0].innerHTML = nextValue(c.children[0].innerHTML);
-        fillFields();
-        solve();
-    })
 }
 
 function main() {
