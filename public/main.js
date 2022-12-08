@@ -119,6 +119,8 @@ function handleFieldsInput() {
         clearSolution(state.solbox);
     else
         getSolution(input).then((sol) => showSolution(sol, state.solbox));
+
+    return input;
 }
 
 // filles the input fields with the values from the kmap
@@ -148,9 +150,7 @@ function fillFields() {
 }
 
 // filles the kmap with the values from the input fields
-function fillKmap() {
-    let input = getFieldsInput(state.n);
-
+function fillKmap(input) {
     if (input === null)
         return;
 
@@ -202,13 +202,13 @@ function main() {
 
     // set up fields (maybe I can combine them into one event listener)
     minsInput.addEventListener('input', () => {
-        handleFieldsInput(state.n);
-        fillKmap();
+        let input = handleFieldsInput(state.n);
+        fillKmap(input);
 
     });
     dcsInput.addEventListener('input', () => {
-        handleFieldsInput(state.n);
-        fillKmap();
+        let input = handleFieldsInput(state.n);
+        fillKmap(input);
     });
 
     // setup resetBtn
