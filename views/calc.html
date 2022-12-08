@@ -13,6 +13,8 @@
         <br>
 
         <main>
+
+            <h4>Solve with filling the Kmap</h4>
             <select id="kmapSize" name="kmapSize">
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -44,6 +46,14 @@
             <button id="resetBtn">reset</button>
             <br>
             <br>
+
+            <div class="input-minterms">
+                <h4>Solve with listing minterms</h4>
+                <label for="minterms">Minterms: </label>
+                <input type="text" id="minterms" name="minterms" placeholder="e.g: 0, 1, 2"> <br>
+                <label for="dontcares">Don't cares: </label>
+                <input type="text" id="dontcares" name="dontcares" placeholder="e.g: 3, 4, 5"> <br>
+            </div>
 
             <div id="solutionBox">
             </div>

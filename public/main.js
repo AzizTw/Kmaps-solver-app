@@ -10,6 +10,8 @@ class State {
         this.select = document.getElementById('kmapSize')
         this.solbox = document.getElementById("solutionBox");
 
+        this.minsInput = document.getElementById("minterms");
+        this.dcsInput = document.getElementById("dontcares");
         this.setN(parseInt(this.select.value));
     }
 
@@ -42,7 +44,7 @@ function labelCells(n) {
 }
 
 function nextValue(val) {
-    return VALUES[(VALUES.indexOf(val)+1) % LENGTH]
+    return VALUES[(VALUES.indexOf(val)+1) % LENGTH];
 }
 
 function toGray(n) {
@@ -118,6 +120,17 @@ function getKmapInput(arr, n) {
     return {mins, dcs, n};
 }
 
+function getFieldsInput(n) {
+
+    let mins = document.getElementById('minterms').value.split(',').map((v) => parseInt(v));
+    let dcs = document.getElementById('dontcares').value.split(',').map((v) => parseInt(v));
+
+    // check if dcs is nan
+    if (isNaN(dcs[0]))
+        dcs = [];
+    return {mins, dcs, n};
+}
+
 // check if the input is valid. A valid input is input that contains at least
 // one minterm
 function isValidInput(input) {
@@ -128,10 +141,68 @@ function solve() { // cells ia nodelist of divs
     let vals = Array.from(state.getCells()).map((c) => c.children[0].innerHTML);
     let input = getKmapInput(vals, state.n);
 
+    // console.log(input)
+
     if (!isValidInput(input))
         clearSolution(state.solbox);
     else
         getSolution(input).then((sol) => showSolution(sol, state.solbox));
+}
+
+// handles the input from the text fields
+function handleFieldsInput() {
+    let input = getFieldsInput(state.n);
+
+
+    if (!isValidInput(input))
+        clearSolution(state.solbox);
+    else
+        getSolution(input).then((sol) => showSolution(sol, state.solbox));
+}
+
+// filles the input fields with the values from the kmap
+function fillFields() {
+    let cells = state.getCells();
+    let pattern = kmapPattern(state.nRows, state.nCols);
+
+    let mins = [];
+    let dcs = [];
+
+    let i = 0;
+    for (let cell of cells) {
+        if (cell.children[0].innerHTML === '1')
+            mins.push(pattern[i]);
+        else if (cell.children[0].innerHTML === 'X')
+            dcs.push(pattern[i]);
+        i++;
+    }
+
+    // sort the minterms and dontcares before they fill the fields (useless ?)
+    mins.sort((a, b) => a - b);
+    dcs.sort((a, b) => a - b);
+
+    document.getElementById('minterms').value = mins.join(', ');
+    document.getElementById('dontcares').value = dcs.join(', ');
+
+}
+
+// filles the kmap with the values from the input fields
+function fillKmap() {
+    let input = getFieldsInput(state.n);
+
+    let cells = state.getCells();
+    let pattern = kmapPattern(state.nRows, state.nCols);
+
+    let i = 0;
+    for (let cell of cells) {
+        if (input.mins.includes(pattern[i]))
+            cell.children[0].innerHTML = '1';
+        else if (input.dcs.includes(pattern[i]))
+            cell.children[0].innerHTML = 'X';
+        else
+            cell.children[0].innerHTML = '&nbsp;';
+        i++;
+    }
 }
 
 function resetKmap() {
@@ -142,11 +213,16 @@ function resetKmap() {
 
 
     clearSolution(state.solbox);
+
+    // clear the input fields
+    state.minsInput.value = '';
+    state.dcsInput.value = '';
 }
 
 function activateCell(c) {
     c.addEventListener('click', () => {
         c.children[0].innerHTML = nextValue(c.children[0].innerHTML);
+        fillFields();
         solve();
     })
 }
@@ -194,6 +270,21 @@ function main() {
         clearSolution(state.solbox);
         resizeKmap(state.n);
         labelCells(state.n);
+        fillKmap();
+        handleFieldsInput(state.n);
+    });
+
+    // set up fields (maybe I can combine them into one event listener)
+    state.minsInput.addEventListener('input', () => {
+        clearSolution(state.solbox);
+        handleFieldsInput(state.n);
+        fillKmap();
+
+    });
+    state.dcsInput.addEventListener('input', () => {
+        clearSolution(state.solbox);
+        handleFieldsInput(state.n);
+        fillKmap();
     });
 
     // setup resetBtn
