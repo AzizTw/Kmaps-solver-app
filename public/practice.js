@@ -1,26 +1,24 @@
 import { State } from "./state.js";
-import { drawKmap, labelCells } from "./utils.js";
+import { drawKmap, labelCells, getKmapInput, getSolution, VALUES, LENGTH } from "./utils.js";
+
+let globalSolution;
 
 console.log("practice.js loaded");
 
 
 function randomizeKmap(state) {
+
     let cells = state.getCells();
-    let n = state.n;
-    let nRows = state.nRows;
-    let nCols = state.nCols;
-    for (let i = 0; i < nRows; i++) {
-        for (let j = 0; j < nCols; j++) {
-            let cell = cells[i * nCols + j];
-            let val = Math.floor(Math.random() * 3);
-            let newVal;
-            if (val === 0) newVal = "&nbsp;";
-            else if (val === 1) newVal = "1";
-            else newVal = "X";
-            cell.children[0].innerHTML = newVal;
-        }
+
+    for (let cell of cells) {
+    // Replace the value of each cell with a random value from VALUES
+    cell.children[0].innerHTML = VALUES[Math.floor(Math.random() * LENGTH)];
     }
-}
+
+    // Add "1" in a random position, so that the kmap is guaranteed to be valid
+    let randPos = Math.floor(Math.random() * cells.length);
+    cells[randPos].children[0].innerHTML = "1";
+};
 
 
 function main() {
@@ -33,7 +31,16 @@ function main() {
         // clearSolution(state.solbox);
         drawKmap(state);
         labelCells(state);
+    });
+    document.getElementById("randBtn").addEventListener("click", () => {
         randomizeKmap(state);
+        let vals = Array.from(state.getCells()).map((c) => c.children[0].innerHTML);
+        let input = getKmapInput(vals, state); 
+        // use getSolution() to get the solution
+        getSolution(input).then((sol) => {
+            globalSolution = sol;
+            console.log(sol);
+        });
     });
 }
 
