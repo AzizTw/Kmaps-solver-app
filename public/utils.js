@@ -62,9 +62,17 @@ export function showSolution(sol, solbox) {
     solbox.style.display = "inline-block";
 }
 
+export function clearKmap(kmap) {
+    kmap.innerHTML = ""; // empty out kmap
+}
 
 export function clearSolution(solbox) {
     // clear the solution box, idk if this is the best way to do it
     solbox.innerHTML = " ";
     solbox.style.display = "none";
+}
+
+export function clearInput(minsInput, dcsInput) {
+    minsInput.value = "";
+    dcsInput.value = "";
 }

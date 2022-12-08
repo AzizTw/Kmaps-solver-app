@@ -1,4 +1,4 @@
-import { getSolution, showSolution, clearSolution, } from "./utils.js";
+import { getSolution, showSolution, clearSolution, clearKmap, clearInput} from "./utils.js";
 
 const VALUES = ['&nbsp;', '1', 'X'];
 const LENGTH = 3;
@@ -245,15 +245,13 @@ function createCell(value) {
     return cell;
 }
 
-function resizeKmap(n) { // n is the number of variables
-    let kmap = state.kmap;
-    kmap.innerHTML = ""; // empty out kmap
+function resizeKmap(n, kmap) { // n is the number of variables
+    clearKmap(kmap)
 
     let nCells = 2**n;
     for (let i = 0; i < nCells; i++){
         kmap.appendChild(createCell('&nbsp;'));
     }
-
 
     kmap.style.gridTemplateColumns = `repeat(${state.nCols}, 1fr)`;
 }
@@ -271,10 +269,11 @@ function main() {
     state.select.addEventListener('change', () => {
         state.setN(parseInt(state.select.value));
         clearSolution(state.solbox);
-        resizeKmap(state.n);
+        resizeKmap(state.n, state.kmap);
+        clearInput(state.minsInput, state.dcsInput);
         labelCells(state.n);
-        fillKmap();
-        handleFieldsInput(state.n);
+        // fillKmap(); No, we want to clear the kmap
+        // handleFieldsInput(state.n);
     });
 
     // set up fields (maybe I can combine them into one event listener)
