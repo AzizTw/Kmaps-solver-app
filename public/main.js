@@ -50,7 +50,8 @@ function parseArray(str) {
     if (str === "")
         return [];
 
-    let reg = /^[0-9]+\s*(,\s*[0-9]+)*,?$/; // TODO: explain this
+    // this regex matches a string of numbers separated by commas, with optional spaces
+    let reg = /^[0-9]+\s*(,\s*[0-9]+)*,?$/; 
     if (!reg.test(str))
         return null;
 
