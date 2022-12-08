@@ -6,13 +6,14 @@ import {
     getKmapInput,
     labelCells,
     kmapPattern,
-    clearInput
+    clearInput,
+    VALUES,
+    LENGTH,
 } from "./utils.js";
 
 import { State } from "./state.js";
 
-const VALUES = ["&nbsp;", "1", "X"];
-const LENGTH = 3;
+
 
 let minsInput = document.getElementById("minterms");
 let dcsInput = document.getElementById("dontcares");
