@@ -1,4 +1,5 @@
 const sqlite = require('aa-sqlite');
+const fs = require('fs');
 
 async function create() {
     await sqlite.open('./database.db3');
@@ -14,18 +15,34 @@ async function create() {
 }
 
 
-async function insert() {
+async function insertDemo() {
     await sqlite.open('./database.db3');
 
 
     let input = { n: 4, mins: [ 0, 7, 13, 8 ], dcs: [ 4, 5, 2 ] };
     let origin = "demo.js";
-    let link  = "~/uni/swe363-webdev/pro/p3";
+    let link  = "cooldemo.com";
     let str = JSON.stringify(input);
 
     let sql = `INSERT INTO Kmap(n, input, origin, link) VALUES(${input.n}, '${str}', '${origin}', '${link}');`;
     // console.log(sql)
     await sqlite.run(sql);
+}
+
+async function insert() {
+    await sqlite.open('./database.db3');
+
+    str = fs.readFileSync("./data/kmap_data.json").toString();
+    data = JSON.parse(str).data;
+
+    for (d of data) {
+        let input = JSON.stringify({n: d.n, mins: d.mins, dcs: d.dcs});
+        let n = d.n;
+        let origin = d.origin;
+        let link = d.link;
+        let sql = `INSERT INTO Kmap(n, input, origin, link) VALUES(${n}, '${input}', '${origin}', '${link}');`;
+        await sqlite.run(sql);
+    }
 }
 
 async function select() {
@@ -35,7 +52,14 @@ async function select() {
     console.log(data);
 }
 
+// async function removeDemo() {
+//     await sqlite.open('./database.db3');
+//     let sql = `delete from Kmap where id = 1`;
+//     await sqlite.run(sql);
+// }
+
+
 // create();
 // insert();
 select();
-// sqlite.close();
+sqlite.close();
