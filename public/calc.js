@@ -68,35 +68,54 @@ function uniquize(arr) {
     return [... new Set(arr)];
 }
 
-// returns an input object if the user input is input. If input is not valid it
-// will return null.
-function getFieldsInput(n) {
-    let mins;
-    let dcs;
+function getFieldInput(field, n) {
 
     // attempt to get get arrays
-    if ((mins = parseArray(minsInput.value)) === null)
+    let vals;
+    if ((vals = parseArray(field.value)) === null)
         return null;
 
-    if ((dcs = parseArray(dcsInput.value)) === null)
-        return null;
-
-    // remove duplciates
-    mins = uniquize(mins);
-    dcs = uniquize(dcs);
+    vals = uniquize(vals);
 
     // check input doesn't exceed limit
     let limit = 2**n - 1;
-    if (Math.max(...mins) > limit || Math.max(...dcs) > limit)
+    if (Math.max(... vals) > limit)
         return null;
 
-    // check if a term is repeated in mins and dcs
-    let intersection = mins.filter((min) => dcs.includes(min));
-    if (intersection.length !== 0)
-        return null;
-
-    return {n, mins, dcs};
+    return vals;
 }
+
+
+
+// returns an input object if the user input is input. If input is not valid it
+// will return null.
+// function getFieldsInput(id, n) {
+//     let mins;
+//     let dcs;
+
+//     // attempt to get get arrays
+//     if ((mins = parseArray(minsInput.value)) === null)
+//         return null;
+
+//     if ((dcs = parseArray(dcsInput.value)) === null)
+//         return null;
+
+//     // remove duplciates
+//     mins = uniquize(mins);
+//     dcs = uniquize(dcs);
+
+//     // check input doesn't exceed limit
+//     let limit = 2**n - 1;
+//     if (Math.max(...mins) > limit || Math.max(...dcs) > limit)
+//         return null;
+
+//     // check if a term is repeated in mins and dcs
+//     let intersection = mins.filter((min) => dcs.includes(min));
+//     if (intersection.length !== 0)
+//         return null;
+
+//     return {n, mins, dcs};
+// }
 
 function solve() {
     // cells ia nodelist of divs
@@ -112,13 +131,30 @@ function solve() {
 }
 
 // handles the input from the text fields
-function handleFieldsInput() {
-    let input = getFieldsInput(state.n);
+function handleFieldsInput(n) {
+    let minsInput = document.getElementById("minterms");
+    let dcsInput = document.getElementById("dontcares");
 
-    if (input === null)
-        console.log("bad input bro");
+    let mins;
+    if ((mins = getFieldInput(minsInput, n)) === null) {
+        console.log("invalid mins");
+        return null;
+    }
 
-    else if (input.mins.length === 0)
+    let dcs;
+    if ((dcs = getFieldInput(dcsInput, n)) === null) {
+        console.log("invalid dcs");
+        return null;
+    }
+
+    let intersection = mins.filter((min) => dcs.includes(min));
+    if (intersection.length !== 0) {
+        console.log("there's intersection!");
+        return null;
+    }
+
+    let input = {n, mins, dcs};
+    if (mins.length === 0)
         clearSolution(state.solbox);
     else
         getSolution(input).then((sol) => showSolution(sol, state.solbox));
@@ -186,12 +222,14 @@ function main() {
     // set up fields (maybe I can combine them into one event listener)
     minsInput.addEventListener('input', () => {
         let input = handleFieldsInput(state.n);
-        fillKmap(input, state);
+        if (input !== null)
+            fillKmap(input, state);
 
     });
     dcsInput.addEventListener('input', () => {
         let input = handleFieldsInput(state.n);
-        fillKmap(input, state);
+        if (input !== null)
+            fillKmap(input, state);
     });
 
     // setup resetBtn
