@@ -102,6 +102,11 @@ ul.sub li {
     margin-right: 5px;
     display: inline;
     padding: 5px;
+    cursor: pointer;
+}
+
+ul.sub li:hover {
+    color: white;
 }
 
 .cross{
@@ -110,4 +115,16 @@ ul.sub li {
 
 .check{
     color: #00ff00;
+}
+
+#copy-tooltip {
+    display: none;
+    position: absolute;
+    /* top: 0px; */
+    /* right: 0px; */
+    margin-left: 40px;
+    padding: 5px 12px;
+    background-color: #000000df;
+    border-radius: 4px;
+    color: #fff;
 }

@@ -18,13 +18,15 @@ export async function getSolution(input) {
 
 // returns a new <ul> element with class name of className (optional) populated with <li>
 // items containing each element of the content array
-export function createList(content, className) {
+export function createList(content, className, callback) {
     let ul = document.createElement("ul");
     if (className) ul.className = className;
 
     for (let c of content) {
         let li = document.createElement("li");
         li.textContent = c;
+        if (callback)
+            callback(li);
         ul.appendChild(li);
     }
 
@@ -33,6 +35,12 @@ export function createList(content, className) {
 
 export function showSolution(sol, solbox) {
     solbox.innerHTML = " "; // clear
+    const addCopyOnClick = (li) => li.addEventListener('click', async () => {
+        await navigator.clipboard.writeText(li.textContent);
+        let tooltip = document.getElementById("copy-tooltip");
+        tooltip.style.display = "inline";
+        setTimeout(() => tooltip.style.display = "none", 500);
+    });
 
     // A <li> for each sub solution
     let liEpis = document.createElement("li");
@@ -42,16 +50,18 @@ export function showSolution(sol, solbox) {
     liPis.innerHTML = "<div class='legend'>PIs &nbsp;</div>";
     liSops.innerHTML = "<div class='legend'>Sops</div>";
 
-    if (sol.epis.length !== 0) liEpis.appendChild(createList(sol.epis, "sub"));
+    if (sol.epis.length !== 0) liEpis.appendChild(createList(sol.epis, "sub", addCopyOnClick));
 
-    liPis.appendChild(createList(sol.pis, "sub"));
+
+    liPis.appendChild(createList(sol.pis, "sub", addCopyOnClick));
+
 
     if (sol.sops[0].length !== 0) {
         // if we have one sop at least
         // make sops look human readable before appending
         for (let i = 0; i < sol.sops.length; i++)
             sol.sops[i] = sol.sops[i].join(" + ");
-        liSops.appendChild(createList(sol.sops, "sub"));
+        liSops.appendChild(createList(sol.sops, "sub", addCopyOnClick));
     }
 
     // main <ul>
