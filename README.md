@@ -45,7 +45,7 @@ Essential things we still did not implement:
     - Ask the user to enter the solution
     - See if the users's solution matches
 
-- [ ] Database with kmaps (maybe with ranging difficulties)
+- [x] Database with kmaps (maybe with ranging difficulties)
     - Inital idea: A K-map is an entyt containing the following:
         - Id (key)
         - Number of variables:
