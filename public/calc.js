@@ -143,7 +143,7 @@ function handleFieldsInput(n) {
 
     let dcs;
     if ((dcs = getFieldInput(dcsInput, n)) === null) {
-        console.log("invalid dcs"); // do something
+        console.log("invalid dcs"); // something
         return null;
     }
 

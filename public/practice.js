@@ -77,8 +77,9 @@ function checkSolution(){
     let nPIsCorrect = globalSolution.pis.length === nPIs;
     let sopCorrect = checkSOP(sop);
 
-    showAnswerResult(nEPIsCorrect, "nPIsCheck");
-    showAnswerResult(nPIsCorrect, "nEPIsCheck");
+    
+    showAnswerResult(nPIsCorrect, "nPIsCheck");
+    showAnswerResult(nEPIsCorrect, "nEPIsCheck");
     showAnswerResult(sopCorrect, "SOPCheck");
 }
 
