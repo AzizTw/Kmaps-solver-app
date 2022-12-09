@@ -1,0 +1,678 @@
+{
+  "data": [
+    {
+      "n": 4,
+      "mins": [
+        0,
+        2,
+        4,
+        6,
+        7,
+        10,
+        11,
+        12
+      ],
+      "dcs": [
+        1,
+        8,
+        13
+      ],
+      "origin": "COE202 Major1-191 (1)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Exam1_191_KEY.pdf"
+    },
+    {
+      "n": 4,
+      "mins": [
+        4,
+        6,
+        9,
+        10,
+        11,
+        13,
+        14
+      ],
+      "dcs": [
+        2,
+        12,
+        15
+      ],
+      "origin": "COE202 Major1-191 (2)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Exam1_191_KEY.pdf"
+    },
+    {
+      "n": 4,
+      "mins": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "dcs": [],
+      "origin": "COE202 Major2-191",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Exam2_191_Key.pdf"
+    },
+    {
+      "n": 4,
+      "mins": [
+        0,
+        1,
+        4,
+        5,
+        7,
+        8,
+        9,
+        15
+      ],
+      "dcs": [
+        2,
+        6,
+        10,
+        14
+      ],
+      "origin": "COE202 Major2-181 (1)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Exam2_T181_Key.pdf"
+    },
+    {
+      "n": 4,
+      "mins": [
+        0,
+        1,
+        2,
+        4,
+        6,
+        8,
+        9
+      ],
+      "dcs": [
+        5,
+        7,
+        13,
+        15
+      ],
+      "origin": "COE202 Major2-181 (2)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Exam2_T181_Key.pdf"
+    },
+    {
+      "n": 4,
+      "mins": [
+        0,
+        2,
+        4,
+        5,
+        10,
+        12,
+        15
+      ],
+      "dcs": [
+        8,
+        14
+      ],
+      "origin": "COE202 Major2-172",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Exam2_T172_Key.pdf"
+    },
+    {
+      "n": 4,
+      "mins": [
+        0,
+        2,
+        3,
+        5,
+        7,
+        8,
+        10,
+        12,
+        13,
+        14,
+        15
+      ],
+      "dcs": [],
+      "origin": "COE202 Major2-161 (1)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Exam2_T161_Key.pdf"
+    },
+    {
+      "n": 4,
+      "mins": [
+        0,
+        2,
+        6,
+        7,
+        8
+      ],
+      "dcs": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "origin": "COE202 Major2-161 (2)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Exam2_T161_Key.pdf"
+    },
+    {
+      "n": 4,
+      "mins": [
+        6,
+        7,
+        9,
+        11,
+        13,
+        14
+      ],
+      "dcs": [],
+      "origin": "COE202 Major2-161 (3)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Exam2_T161_Key.pdf"
+    },
+    {
+      "n": 3,
+      "mins": [
+        2,
+        3,
+        5,
+        7
+      ],
+      "dcs": [],
+      "origin": "COE202 Major2-161 (4)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Exam2_T161_Key.pdf"
+    },
+    {
+      "n": 3,
+      "mins": [
+        0,
+        3,
+        5,
+        7
+      ],
+      "dcs": [],
+      "origin": "COE202 Major2-151 (1)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Exam2_T151_Key.pdf"
+    },
+    {
+      "n": 4,
+      "mins": [
+        4,
+        5,
+        9,
+        10,
+        11,
+        12,
+        14,
+        15
+      ],
+      "dcs": [],
+      "origin": "COE202 Major2-151 (2)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Exam2_T151_Key.pdf"
+    },
+    {
+      "n": 4,
+      "mins": [
+        2,
+        4,
+        10,
+        12,
+        14
+      ],
+      "dcs": [
+        1,
+        5,
+        6,
+        8
+      ],
+      "origin": "COE202 Major2-151 (3)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Exam2_T151_Key.pdf"
+    },
+    {
+      "n": 4,
+      "mins": [
+        4,
+        5,
+        6,
+        10,
+        12,
+        13
+      ],
+      "dcs": [
+        3,
+        7,
+        9
+      ],
+      "origin": "COE202 Major2-142 (1)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Exam2_T142_Key.pdf"
+    },
+    {
+      "n": 4,
+      "mins": [
+        0,
+        2,
+        8,
+        11,
+        13,
+        15
+      ],
+      "dcs": [
+        3,
+        6,
+        7,
+        9,
+        12
+      ],
+      "origin": "COE202 Major2-142 (2)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Exam2_T142_Key.pdf"
+    },
+    {
+      "n": 4,
+      "mins": [
+        3,
+        4,
+        5,
+        9,
+        10,
+        11,
+        15
+      ],
+      "dcs": [],
+      "origin": "COE202 Major2-142 (3)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Exam2_T142_Key.pdf"
+    },
+    {
+      "n": 3,
+      "mins": [
+        2,
+        5,
+        6,
+        7
+      ],
+      "dcs": [],
+      "origin": "COE202 Major2-142 (4)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Exam2_T142_Key.pdf"
+    },
+    {
+      "n": 4,
+      "mins": [
+        1,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        12,
+        13,
+        14
+      ],
+      "dcs": [],
+      "origin": "COE202 Major2-141 (1)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Exam2_T141_key.pdf"
+    },
+    {
+      "n": 4,
+      "mins": [
+        0,
+        9,
+        15
+      ],
+      "dcs": [
+        4,
+        11,
+        13
+      ],
+      "origin": "COE202 Major2-141 (2)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Exam2_T141_key.pdf"
+    },
+    {
+      "n": 4,
+      "mins": [
+        0,
+        1,
+        2,
+        4,
+        6,
+        10,
+        12
+      ],
+      "dcs": [
+        7,
+        13,
+        14,
+        15
+      ],
+      "origin": "COE202 Major2-132 (1)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Exam2_T132_Key.pdf"
+    },
+    {
+      "n": 4,
+      "mins": [
+        1,
+        4,
+        5,
+        6,
+        9,
+        12
+      ],
+      "dcs": [
+        0,
+        7,
+        10,
+        13,
+        15
+      ],
+      "origin": "COE202 Major2-132 (2)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Exam2_T132_Key.pdf"
+    },
+    {
+      "n": 4,
+      "mins": [
+        1,
+        3,
+        4,
+        6,
+        9,
+        11,
+        12,
+        14
+      ],
+      "dcs": [],
+      "origin": "COE202 Major2-132 (3)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Exam2_T132_Key.pdf"
+    },
+    {
+      "n": 4,
+      "mins": [
+        1,
+        2,
+        3,
+        5,
+        7,
+        8,
+        10
+      ],
+      "dcs": [],
+      "origin": "COE202 Final-191",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Final_191_Key.pdf"
+    },
+    {
+      "n": 3,
+      "mins": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "dcs": [],
+      "origin": "COE202 Final-171 (1)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Final_T171_Key.pdf"
+    },
+    {
+      "n": 3,
+      "mins": [
+        1,
+        2,
+        4,
+        7
+      ],
+      "dcs": [],
+      "origin": "COE202 Final-171 (2)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Final_T171_Key.pdf"
+    },
+    {
+      "n": 3,
+      "mins": [
+        4,
+        7
+      ],
+      "dcs": [],
+      "origin": "COE202 Final-171 (3)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Final_T171_Key.pdf"
+    },
+    {
+      "n": 4,
+      "mins": [
+        6,
+        8,
+        10
+      ],
+      "dcs": [
+        12,
+        13,
+        14,
+        15
+      ],
+      "origin": "COE202 Final-161 (1)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Final_T161_Key.pdf"
+    },
+    {
+      "n": 4,
+      "mins": [
+        2,
+        4,
+        11
+      ],
+      "dcs": [],
+      "origin": "COE202 Final-161 (2)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Final_T161_Key.pdf"
+    },
+    {
+      "n": 4,
+      "mins": [
+        0,
+        4,
+        8,
+        9,
+        10,
+        11
+      ],
+      "dcs": [
+        12,
+        13,
+        14,
+        15
+      ],
+      "origin": "COE202 Final-161 (3)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Final_T161_Key.pdf"
+    },
+    {
+      "n": 4,
+      "mins": [
+        2,
+        4,
+        11
+      ],
+      "dcs": [
+        12,
+        13,
+        14,
+        15
+      ],
+      "origin": "COE202 Final-161 (4)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Final_T161_Key.pdf"
+    },
+    {
+      "n": 4,
+      "mins": [
+        6,
+        8,
+        10
+      ],
+      "dcs": [],
+      "origin": "COE202 Final-161 (1)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Final_T161_Key.pdf"
+    },
+    {
+      "n": 4,
+      "mins": [
+        0,
+        4,
+        8,
+        9,
+        10,
+        11
+      ],
+      "dcs": [],
+      "origin": "COE202 Final-161 (2)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Final_T161_Key.pdf"
+    },
+    {
+      "n": 4,
+      "mins": [
+        5,
+        7,
+        8,
+        10,
+        12,
+        14
+      ],
+      "dcs": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "origin": "COE202 Final-142 (1)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Final_T142_Key.pdf"
+    },
+    {
+      "n": 4,
+      "mins": [
+        4,
+        6,
+        9,
+        11,
+        12,
+        13,
+        14
+      ],
+      "dcs": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "origin": "COE202 Final-142 (2)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Final_T142_Key.pdf"
+    },
+    {
+      "n": 4,
+      "mins": [
+        4,
+        5,
+        6,
+        10,
+        11,
+        15
+      ],
+      "dcs": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "origin": "COE202 Final-142 (3)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Final_T142_Key.pdf"
+    },
+    {
+      "n": 3,
+      "mins": [
+        3,
+        5,
+        6,
+        7
+      ],
+      "dcs": [],
+      "origin": "COE202 Final-141 (1)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Final_T141_Key.pdf"
+    },
+    {
+      "n": 3,
+      "mins": [
+        1,
+        3,
+        7
+      ],
+      "dcs": [],
+      "origin": "COE202 Final-141 (2)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Final_T141_Key.pdf"
+    },
+    {
+      "n": 3,
+      "mins": [
+        2,
+        4,
+        6
+      ],
+      "dcs": [],
+      "origin": "COE202 Final-141 (3)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Final_T141_Key.pdf"
+    },
+    {
+      "n": 3,
+      "mins": [
+        0,
+        1,
+        2,
+        4,
+        6
+      ],
+      "dcs": [],
+      "origin": "COE202 Final-132 (1)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Final_T132_Key.pdf"
+    },
+    {
+      "n": 3,
+      "mins": [
+        0,
+        1,
+        3,
+        5,
+        7
+      ],
+      "dcs": [],
+      "origin": "COE202 Final-132 (2)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Final_T132_Key.pdf"
+    },
+    {
+      "n": 3,
+      "mins": [
+        2,
+        4
+      ],
+      "dcs": [
+        3,
+        7
+      ],
+      "origin": "COE202 Final-132 (3)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Final_T132_Key.pdf"
+    },
+    {
+      "n": 3,
+      "mins": [
+        5,
+        6
+      ],
+      "dcs": [
+        3,
+        7
+      ],
+      "origin": "COE202 Final-132 (4)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Final_T132_Key.pdf"
+    },
+    {
+      "n": 3,
+      "mins": [
+        1,
+        4,
+        6
+      ],
+      "dcs": [
+        3,
+        7
+      ],
+      "origin": "COE202 Final-132 (5)",
+      "link": "https://faculty.kfupm.edu.sa/coe/mudawar/coe202/Exams/COE202_Final_T132_Key.pdf"
+    }
+  ]
+}
