@@ -137,19 +137,19 @@ function handleFieldsInput(n) {
 
     let mins;
     if ((mins = getFieldInput(minsInput, n)) === null) {
-        console.log("invalid mins");
+        console.log("invalid mins"); // do something
         return null;
     }
 
     let dcs;
     if ((dcs = getFieldInput(dcsInput, n)) === null) {
-        console.log("invalid dcs");
+        console.log("invalid dcs"); // do something
         return null;
     }
 
     let intersection = mins.filter((min) => dcs.includes(min));
     if (intersection.length !== 0) {
-        console.log("there's intersection!");
+        console.log("there's intersection!"); // do somethingk
         return null;
     }
 
