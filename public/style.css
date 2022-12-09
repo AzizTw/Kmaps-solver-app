@@ -8,7 +8,7 @@ body {
     margin: 0 auto;
     /* max-width: 80vw; */
     text-align: center;
-    background-color: #f0fff0; /* pure white hurts eyes */
+    background-color: #EEEEEE; /* pure white hurts eyes */
 }
 
 .kmap {
@@ -18,8 +18,8 @@ body {
     margin: 0 auto;
     gap: 10px;
     grid-template-columns: 1fr 1fr;
-    background-color: #68889d;
-    border: #839fa5 5px solid;
+    background-color: #222831;
+    border: #00ADB5 2.5px solid;
 }
 
 .kmap > .cell {
@@ -30,7 +30,7 @@ body {
     justify-content: center;
     align-items: center;
     color: lightgray;
-    background-color: #282828;
+    background-color: #393E46;
     cursor: pointer;
     /* font-weight: bold; */
 }
@@ -73,10 +73,10 @@ ul {
     text-align: left;
     margin: 0 auto;
     display: none;
-    color: lightgray;
-    background-color: #68889d;
+    color: #393E46;
+    background-color: #EEEEEE;
     padding: 5px;
-    border: solid;
+    border: solid 2px;
 }
 
 div.legend {
@@ -84,8 +84,8 @@ div.legend {
     border: solid;
     margin-right: 10px;
     padding: 5px;
-    color: #282828;
-    background-color: #f9f5d7;
+    color: #222831;
+    background-color: #00ADB5;
     width: 2em;
     height: 1em;
 }
@@ -98,7 +98,7 @@ ul.sub {
 ul.sub li {
     border: solid;
     color: lightgray;
-    background-color: #282828;
+    background-color: #222831;
     margin-right: 5px;
     display: inline;
     padding: 5px;
@@ -128,3 +128,34 @@ ul.sub li:hover {
     border-radius: 4px;
     color: #fff;
 }
+
+/* Styling for the TOP navigation bar */
+
+/* Add a black background color to the top navigation */
+.topnav {
+    background-color: #222831;
+    overflow: hidden;
+  }
+  
+  /* Style the links inside the navigation bar */
+  .topnav a {
+    float: left;
+    color: #EEEEEE;
+    text-align: center;
+    padding: 10px 12px;
+    text-decoration: none;
+    font-size: 12px;
+  }
+  
+  /* Change the color of links on hover */
+  .topnav a:hover {
+    background-color: #393E46;
+    color: #EEEEEE;
+  }
+  
+  /* Add a color to the active/current link */
+  .topnav a.active {
+    background-color: #00ADB5;
+    color: #1a1f26;
+  }
+  /* END OF NAV STYLING */
