@@ -137,7 +137,7 @@ h4 {
     font-weight: normal;
 }
 
-.input-vals {
+.input-vals, .input-sol {
     max-width: 50%;
     text-align: center;
     display: block;
@@ -152,14 +152,34 @@ h4 {
     margin-bottom: 5px;
 }
 
-.input-row label {
+.input-vals label {
     display: inline-block;
     width: 80px;
 }
 
+.input-sol label {
+    display: inline-block;
+    width: 130px;
+}
+
+.input-sol {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+
 .input-row input {
     padding: 5px;
 }
+
+.kmapSize-box, .kmapPicker-box {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 3px;
+}
+
 
 .kmapSize-box {
     display: block;
@@ -177,7 +197,16 @@ h4 {
     font-size: 110%;
 }
 
-button#resetBtn {
+.kmapPicker-box > * {
+    margin-right: 4px;
+    padding: 3px;
+}
+
+.kmapPicker-box label {
+    margin-right: 0px;
+}
+
+button#resetBtn, button#checkBtn {
     display: block;
     margin: 0 auto;
     margin-bottom: 10px;

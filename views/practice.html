@@ -24,19 +24,24 @@
         <br>
 
         <main>
-            <select id="kmapId" name="kmapId">
-                <option disabled selected value> -- Select a Kmap -- </option>
-                {% for x in info %}
-                <option value="{{x.id}}">{{x.origin}}</option>
-                {% endfor %}
-            </select>
 
-            <select id="kmapSize" name="kmapSize">
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
+            <div class="kmapPicker-box">
+                <select id="kmapId" name="kmapId">
+                    <option disabled selected value> -- Select a Kmap -- </option>
+                    {% for x in info %}
+                    <option value="{{x.id}}">{{x.origin}}</option>
+                    {% endfor %}
+                </select>
+                <label for="kmapSize">n =</label>
+                <select id="kmapSize" name="kmapSize">
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <button id="randBtn">Randomize</button>
+            </div>
+
             <!-- Four kmap AB vs CD-->
             <div class="kmap">
                 <div class="cell">&nbsp;</div>
@@ -44,26 +49,26 @@
                 <div class="cell">&nbsp;</div>
                 <div class="cell">&nbsp;</div>
             </div>
-            <button id="randBtn">Randomize</button>
 
-            <!-- TODO: remove later -->
-            <br>
-            <br>
-            <label for="nPIs">Enter The number of PIs:</label>
-            <input id="nPIs" name="nPIs" type="text">
-            <span id="nPIsCheck"></span>
-            <br>
-            <label for="nEPIs">Enter The number of EPIs:</label>
-            <input id="nEPIs" name="nEPIs" type="text">
-            <span id="nEPIsCheck"></span>
-            <br>
-            <label for="SOP">Enter one possible SOP:</label>
-            <input id="SOP" name="SOP" type="text">
-            <span id="SOPCheck"></span>
-            <br>
-            <button id="checkBtn">Check</button>
-            <br>
-            <br>
+
+            <div class="input-sol">
+                <div class="input-row">
+                    <label for="nPIs">Number of PIs:</label>
+                    <input id="nPIs" name="nPIs" type="text">
+                    <span id="nPIsCheck"></span>
+                </div>
+                <div class="input-row">
+                    <label for="nEPIs">Number of EPIs:</label>
+                    <input id="nEPIs" name="nEPIs" type="text">
+                    <span id="nEPIsCheck"></span>
+                </div>
+                <div class="input-row">
+                    <label for="SOP">One possible SOP:</label>
+                    <input id="SOP" name="SOP" type="text">
+                    <span id="SOPCheck"></span>
+                </div>
+                <button id="checkBtn">Check</button>
+            </div>
 
             <div id="solutionBox">
             </div>
