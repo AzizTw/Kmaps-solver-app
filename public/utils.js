@@ -1,4 +1,3 @@
-
 export const VALUES = ["&nbsp;", "1", "X"];
 export const LENGTH = 3;
 
@@ -24,6 +23,7 @@ export function createList(content, className, callback) {
 
     for (let c of content) {
         let li = document.createElement("li");
+        li.className = "subCell";
         li.textContent = c;
         if (callback)
             callback(li);
@@ -221,4 +221,78 @@ export function fillKmap(input, state) {
     }
 }
 
+function detranslate(n, implicant) {
+    if (implicant === "1") {
+        return "-".repeat(n);
+    }
 
+    let negated = [];
+    let not_negated = [];
+    for (let i = 0; i < implicant.length; i++) {
+        let literal = implicant[i];
+        if (i + 1 < implicant.length && implicant[i+1] === '\'') {
+            negated.push(literal);
+        } else if (literal !== '\'') {
+            not_negated.push(literal);
+        }
+    }
+
+    let returned_implicant = "";
+    for (let i = 0; i < n; i++) {
+        let c = String.fromCharCode("A".charCodeAt(0) + i);
+        if (not_negated.includes(c)) {
+            returned_implicant += "1";
+        } else if (negated.includes(c)) {
+            returned_implicant += "0";
+        } else {
+            returned_implicant += "-";
+        }
+    }
+    return returned_implicant;
+}
+
+function is_covered(min, imp) {
+    let z = zip(min, imp);
+    let imp_bit;
+    let min_bit;
+
+    for (let pair of z) {
+        min_bit = pair[0];
+        imp_bit = pair[1];
+        if (imp_bit === "-")
+            continue;
+        else if (imp_bit !== min_bit) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function zip(a, b) {
+    let z = [];
+    for (let i = 0; i < a.length; i++)
+        z.push([a[i], b[i]]);
+
+    return z;
+}
+
+// a function that takes an array of minterms and returns the minters that are covered by the implicant
+export function are_covered(state, implicant) {
+    let covered = [];
+    let minterms = [];
+    for (let i = 0; i < (state.nRows * state.nCols); i++) {
+        // add minterms to the array as a binary string with lenght of n
+        minterms.push(i.toString(2).padStart(state.n, "0"));
+    }
+
+    for (let imp of implicant.replace(/\s/g, '').split("+")){
+        imp = detranslate(state.n, imp);
+        for (let minterm of minterms) {
+            if (is_covered(minterm, imp)) {
+                covered.push(parseInt(minterm, 2));
+            }
+        }
+    }
+
+    return covered;
+}

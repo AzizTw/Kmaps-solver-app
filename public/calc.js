@@ -10,6 +10,7 @@ import {
     fillKmap,
     VALUES,
     LENGTH,
+    are_covered,
 } from "./utils.js";
 
 import { State } from "./state.js";
@@ -40,6 +41,40 @@ function activateCells(state) {
             fillFields();
             solve();
         });
+}
+
+function activateSubs(){
+    let subs = document.querySelectorAll(".subCell");
+
+    subs.forEach((sub) => {
+        sub.addEventListener("mouseover", () => {
+            highlightMins(sub.textContent);
+        });
+        
+        sub.addEventListener("mouseout", () => {
+            unhighlightMins(sub.textContent);
+        });
+    });
+}
+
+function highlightMins(implicant){
+    let cells = state.getCells();
+    let pattern = kmapPattern(state.nRows, state.nCols);
+    let mins = are_covered(state, implicant)
+
+    mins.forEach((min) => {
+        cells[pattern.indexOf(min)].classList.add("highlight");
+    });
+}
+
+function unhighlightMins(implicant){
+    let cells = state.getCells();
+    let pattern = kmapPattern(state.nRows, state.nCols);
+    let mins = are_covered(state, implicant)
+
+    mins.forEach((min) => {
+        cells[pattern.indexOf(min)].classList.remove("highlight");
+    });
 }
 
 // returns an array of numbers from a list of a comma seperated strings
@@ -127,7 +162,11 @@ function solve() {
     if (input.mins.length === 0) // valid kmap
         clearSolution(state.solbox);
     else
-        getSolution(input).then((sol) => showSolution(sol, state.solbox));
+        getSolution(input).then((sol) => {
+            showSolution(sol, state.solbox);
+            activateSubs();
+        });
+    
 }
 
 // handles the input from the text fields
