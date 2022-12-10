@@ -23,13 +23,18 @@
 
         <main>
 
-            <h4>Solve with filling the Kmap</h4>
-            <select id="kmapSize" name="kmapSize">
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
+            <h4>Solve by filling a K-map</h4>
+
+            <div class="kmapSize-box">
+                <label for="kmapSize">n = </label>
+                <select id="kmapSize" name="kmapSize">
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+
             <!-- Four kmap AB vs CD-->
             <div class="kmap">
                 <div class="cell">
@@ -46,22 +51,21 @@
                 </div>
             </div>
 
-            <!-- TODO: remove later -->
-            <br>
-            <br>
-            <button id="resetBtn">reset</button>
-            <br>
-            <br>
+            <button id="resetBtn">Reset</button>
 
-            <div class="input-minterms">
-                <h4>Solve with listing minterms</h4>
-                <label for="minterms">Minterms: </label>
-                <input type="text" id="minterms" name="minterms" placeholder="e.g: 0, 1, 2">
-                <span id="minsCross">&#10008; Invalid input</span>
-                <br>
-                <label for="dontcares">Don't cares: </label>
-                <input type="text" id="dontcares" name="dontcares" placeholder="e.g: 3, 8, 5">
-                <span id="dcsCross">&#10008; Invalid input</span>
+
+            <div class="input-vals">
+                <h4 style="margin-bottom: 5px">Solve by listing minterms</h4>
+                <div class="input-row">
+                    <label for="minterms">Minterms: </label>
+                    <input type="text" id="minterms" name="minterms" placeholder="e.g: 0, 1, 2">
+                    <span id="minsCross">&#10008; Invalid input</span>
+                </div>
+                <div class="input-row">
+                    <label for="dontcares">Don't cares: </label>
+                    <input type="text" id="dontcares" name="dontcares" placeholder="e.g: 3, 8, 5">
+                    <span id="dcsCross">&#10008; Invalid input</span>
+                </div>
             </div>
 
             <div id="solutionBox">

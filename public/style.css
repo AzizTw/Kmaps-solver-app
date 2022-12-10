@@ -84,8 +84,10 @@ div.legend {
     border: solid;
     margin-right: 10px;
     padding: 5px;
-    color: #222831;
+    color: white;
+    /* color: #EEEEEE; */
     background-color: #00ADB5;
+    border: black solid;
     width: 2em;
     height: 1em;
 }
@@ -106,7 +108,9 @@ ul.sub li {
 }
 
 ul.sub li:hover {
-    color: white;
+    color: #EEEEEE;
+    background-color: #393E46;
+    border-color: #222831;
 }
 
 .cross{
@@ -129,6 +133,59 @@ ul.sub li:hover {
     color: #fff;
 }
 
+h4 {
+    font-weight: normal;
+}
+
+.input-vals {
+    max-width: 50%;
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+
+
+.input-row {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-row label {
+    display: inline-block;
+    width: 80px;
+}
+
+.input-row input {
+    padding: 5px;
+}
+
+.kmapSize-box {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 3px;
+}
+
+.kmapSize-box select {
+    padding: 3px;
+}
+
+.kmapSize-box label {
+    font-size: 110%;
+}
+
+button#resetBtn {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 5px;
+}
+
+
 /* Styling for the TOP navigation bar */
 
 /* Add a black background color to the top navigation */
@@ -136,7 +193,7 @@ ul.sub li:hover {
     background-color: #222831;
     overflow: hidden;
   }
-  
+
   /* Style the links inside the navigation bar */
   .topnav a {
     float: left;
@@ -146,13 +203,13 @@ ul.sub li:hover {
     text-decoration: none;
     font-size: 12px;
   }
-  
+
   /* Change the color of links on hover */
   .topnav a:hover {
     background-color: #393E46;
     color: #EEEEEE;
   }
-  
+
   /* Add a color to the active/current link */
   .topnav a.active {
     background-color: #00ADB5;
