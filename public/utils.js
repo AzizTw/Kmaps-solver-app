@@ -46,12 +46,13 @@ export function showSolution(sol, solbox) {
     let liEpis = document.createElement("li");
     let liPis = document.createElement("li");
     let liSops = document.createElement("li");
-    liEpis.innerHTML = "<div class='legend'>EPIs</div>";
     liPis.innerHTML = "<div class='legend'>PIs &nbsp;</div>";
     liSops.innerHTML = "<div class='legend'>Sops</div>";
 
-    if (sol.epis.length !== 0) liEpis.appendChild(createList(sol.epis, "sub", addCopyOnClick));
-
+    if (sol.epis.length !== 0){
+        liEpis.innerHTML = "<div class='legend'>EPIs</div>";
+        liEpis.appendChild(createList(sol.epis, "sub", addCopyOnClick));
+    } 
 
     liPis.appendChild(createList(sol.pis, "sub", addCopyOnClick));
 
