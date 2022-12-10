@@ -80,6 +80,10 @@ ul {
     max-width: 80%;
 }
 
+.cell.highlight {
+    background-color: #00ADB5;
+}
+
 div.legend {
     display: inline-block;
     border: solid;
