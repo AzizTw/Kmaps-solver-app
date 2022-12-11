@@ -56,13 +56,18 @@ export function showSolution(sol, solbox) {
 
     liPis.appendChild(createList(sol.pis, "sub", addCopyOnClick));
 
-
-    if (sol.sops[0].length !== 0) {
+    console.log(sol.sops);
+    // i will make a dummy sops variable that is a copy of sol.sops
+    // so that we can modify it without affecting sol.sops
+    let sops = sol.sops.slice();
+    if (sops[0].length !== 0) {
         // if we have one sop at least
         // make sops look human readable before appending
-        for (let i = 0; i < sol.sops.length; i++)
-            sol.sops[i] = sol.sops[i].join(" + ");
-        liSops.appendChild(createList(sol.sops, "sub", addCopyOnClick));
+        for (let i = 0; i < sops.length; i++){
+            sops[i] = sops[i].join(" + ");
+        }
+            
+        liSops.appendChild(createList(sops, "sub", addCopyOnClick));
     }
 
     // main <ul>
@@ -301,4 +306,38 @@ export function are_covered(state, implicant) {
     }
 
     return covered;
+}
+
+export function activateSubs(state){
+    let subs = document.querySelectorAll(".subCell");
+
+    subs.forEach((sub) => {
+        sub.addEventListener("mouseover", () => {
+            highlightMins(state, sub.textContent);
+        });
+        
+        sub.addEventListener("mouseout", () => {
+            unhighlightMins(state, sub.textContent);
+        });
+    });
+}
+
+function highlightMins(state, implicant){
+    let cells = state.getCells();
+    let pattern = kmapPattern(state.nRows, state.nCols);
+    let mins = are_covered(state, implicant)
+
+    mins.forEach((min) => {
+        cells[pattern.indexOf(min)].classList.add("highlight");
+    });
+}
+
+function unhighlightMins(state, implicant){
+    let cells = state.getCells();
+    let pattern = kmapPattern(state.nRows, state.nCols);
+    let mins = are_covered(state, implicant)
+
+    mins.forEach((min) => {
+        cells[pattern.indexOf(min)].classList.remove("highlight");
+    });
 }
