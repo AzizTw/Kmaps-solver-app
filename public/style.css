@@ -1,4 +1,6 @@
 /* remove bowser styles */
+
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
 * {
     padding: 0;
     margin: 0;
@@ -13,6 +15,7 @@ body {
     /* max-width: 80vw; */
     text-align: center;
     background-color: #EEEEEE; /* pure white hurts eyes */
+    /* font-family: "Poppins", sans-serif; */
 }
 
 .kmap {
@@ -245,9 +248,9 @@ button#checkBtn, button#showSolBtn {
     float: left;
     color: #EEEEEE;
     text-align: center;
-    padding: 10px 12px;
+    padding: 14px 16px;
     text-decoration: none;
-    font-size: 12px;
+    font-size: 17px;
   }
 
   /* Change the color of links on hover */
@@ -263,6 +266,71 @@ button#checkBtn, button#showSolBtn {
   }
   /* END OF NAV STYLING */
 
+  /* Styling for the "How to Use" popout */
+  .aboutBtn{
+    position: absolute;
+    left: 15px;
+    bottom: 20px;
+    background: #EEEEEE;
+    border: 0;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .modal_container{
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    opacity: 0;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    transition: opacity 0.3s ease;
+  }
+
+  .modal_container.show{
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .modal{
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 30px 50px;
+    width: 40%;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .modal h1{
+    margin: 1%;
+  }
+
+  .modal p{
+    font-size: 18px;
+    opacity: 0.7;
+  }
+
+  .modal button{
+
+    margin-top: 50px;
+    padding: 10px 60px;
+    background: #222831;
+    color: #EEEEEE;
+    border: 0;
+    outline: none;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+
+  }
 #minsCross, #dcsCross {
     position: absolute;
     padding-left: 5px;

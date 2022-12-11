@@ -74,6 +74,30 @@
             <div id="solutionBox">
             </div>
             <span id="copy-tooltip">copied!</span>
+
+            <!-- HOW TO USE BUTTON -->
+            <button type="submit" class="aboutBtn" onclick="openModal()">ABOUT US</button>
+            <div class="modal_container" id="modal_container">
+                <div class="modal" id="modal">
+
+                    <h1>About US 😎</h1>
+                    <p>Our team is consisting of 4 nerds who were doing a website project for swe 363 which suddenly turned into a useful tool to help our fellow oria students in their courses providing an automated k-map solver with old exams</p>
+
+                    <button type="button" id="closeBtn" onclick="closeModal()">CLOSE</button>
+                </div>
+            </div>
+            <script>
+                const modal_container = document.getElementById("modal_container");
+
+
+                function openModal(){
+                    modal_container.classList.add("show");
+                };
+
+                function closeModal(){
+                    modal_container.classList.remove("show");
+                };
+            </script>
         </main>
 
         <script type="module" src="calc.js"></script>
