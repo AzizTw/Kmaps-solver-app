@@ -178,11 +178,24 @@ function handleFieldsInput(n) {
     let dcsInput = document.getElementById("dontcares");
     let minsCross = document.getElementById("minsCross");
     let dcsCross = document.getElementById("dcsCross");
+    let intsc = document.getElementById("intersection");
 
     let mins;
-    if ((mins = getFieldInput(minsInput, n)) === null) {
-        minsCross.innerHTML = "&#10008; Invalid input";
+    let dcs;
+    if ((mins = getFieldInput(minsInput, n)) === null || (dcs = getFieldInput(dcsInput, n)) === null) {
+        // minsCross.innerHTML = "&#10008; Invalid input";
         clearSolution(state.solbox);
+
+        if (getFieldInput(minsInput, n) === null)
+            minsCross.innerHTML = "&#10008; Invalid input";
+        else
+            minsCross.innerHTML = "";
+
+        if (getFieldInput(dcsInput, n) === null)
+            dcsCross.innerHTML = "&#10008; Invalid input";
+        else
+            dcsCross.innerHTML = "";
+
 
         // clear the kmap
         for (let c of state.getCells()) {
@@ -192,17 +205,16 @@ function handleFieldsInput(n) {
         return null;
     }
 
-    let dcs;
-    if ((dcs = getFieldInput(dcsInput, n)) === null) {
-        dcsCross.innerHTML = "&#10008; Invalid input";
-        clearSolution(state.solbox);
+    // if ((dcs = getFieldInput(dcsInput, n)) === null) {
+    //     dcsCross.innerHTML = "&#10008; Invalid input";
+    //     clearSolution(state.solbox);
 
-        for (let c of state.getCells()) {
-            c.children[0].innerHTML = "&nbsp;";
-        }
+    //     for (let c of state.getCells()) {
+    //         c.children[0].innerHTML = "&nbsp;";
+    //     }
 
-        return null;
-    }
+    //     return null;
+    // }
 
     // clear crosses if input is valid
     dcsCross.innerHTML = "";
@@ -210,10 +222,16 @@ function handleFieldsInput(n) {
     let intersection = mins.filter((min) => dcs.includes(min));
     if (intersection.length !== 0) {
         console.log("there's intersection!"); // do something
+        intsc.innerHTML = "&#10008; There's an intersection between minterms and don't cares!";
 
+        for (let c of state.getCells()) {
+            c.children[0].innerHTML = "&nbsp;";
+        }
+        clearSolution(state.solbox);
         return null;
     }
 
+    intsc.innerHTML = "";
     let input = {n, mins, dcs};
     if (mins.length === 0)
         clearSolution(state.solbox);
