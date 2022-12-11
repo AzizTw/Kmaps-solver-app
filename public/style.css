@@ -212,7 +212,7 @@ h4 {
     margin-right: 0px;
 }
 
-button#resetBtn, button#checkBtn {
+button#resetBtn {
     display: block;
     margin: 0 auto;
     margin-bottom: 10px;
@@ -220,6 +220,13 @@ button#resetBtn, button#checkBtn {
     padding: 5px;
 }
 
+button#checkBtn, button#showSolBtn {
+    /* display: block; */
+    margin: 0 auto;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 5px;
+}
 
 /* Styling for the TOP navigation bar */
 
