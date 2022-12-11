@@ -285,17 +285,17 @@ button#checkBtn, button#showSolBtn {
     align-items: center;
     justify-content: center;
     position: fixed;
-    opacity: 0;
     pointer-events: none;
     top: 0;
     left: 0;
     height: 100vh;
     width: 100vw;
     transition: opacity 0.3s ease;
+    visibility: hidden;
   }
 
   .modal_container.show{
-    opacity: 1;
+    visibility: visible;
     pointer-events: auto;
   }
   .modal{
