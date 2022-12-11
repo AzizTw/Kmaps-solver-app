@@ -41,9 +41,7 @@ function activateCells(state) {
             c.children[0].innerHTML = nextValue(c.children[0].innerHTML);
             fillFields();
             solve();
-
-            document.getElementById("minsCross").innerHTML = "";
-            document.getElementById("dcsCross").innerHTML = "";
+            clearErrors();
         });
 }
 
