@@ -91,6 +91,12 @@ export function clearInput(minsInput, dcsInput) {
     dcsInput.value = "";
 }
 
+export function clearErrors() {
+    document.getElementById("minsCross").innerHTML = "";
+    document.getElementById("dcsCross").innerHTML = "";
+    document.getElementById("intersection").innerHTML = "";
+}
+
 // Create an inactive cell, so it can be used for both modes.
 // Later, we can activate the cells for calc mode.
 function createCell(value) {

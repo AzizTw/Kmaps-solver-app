@@ -2,6 +2,7 @@ import {
     getSolution,
     showSolution,
     clearSolution,
+    clearErrors,
     drawKmap,
     getKmapInput,
     labelCells,
@@ -185,6 +186,7 @@ function handleFieldsInput(n) {
     if ((mins = getFieldInput(minsInput, n)) === null || (dcs = getFieldInput(dcsInput, n)) === null) {
         // minsCross.innerHTML = "&#10008; Invalid input";
         clearSolution(state.solbox);
+        intsc.innerHTML = "";
 
         if (getFieldInput(minsInput, n) === null)
             minsCross.innerHTML = "&#10008; Invalid input";
@@ -297,6 +299,7 @@ function main() {
         clearInput(minsInput, dcsInput);
         labelCells(state);
         activateCells(state);
+        clearErrors();
         // fillKmap(); No, we want to clear the kmap
         // handleFieldsInput(state.n);
     });
