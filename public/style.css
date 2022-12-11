@@ -261,4 +261,11 @@ button#checkBtn, button#showSolBtn {
 
 #minsCross, #dcsCross {
     position: absolute;
+    padding-left: 5px;
+    padding-top: 2px;
+}
+
+#nPIsCheck, #nEPIsCheck, #SOPCheck{
+    position: absolute;
+    padding-left: 5px;
 }
