@@ -40,6 +40,9 @@ function activateCells(state) {
             c.children[0].innerHTML = nextValue(c.children[0].innerHTML);
             fillFields();
             solve();
+
+            document.getElementById("minsCross").innerHTML = "";
+            document.getElementById("dcsCross").innerHTML = "";
         });
 }
 
@@ -179,12 +182,25 @@ function handleFieldsInput(n) {
     let mins;
     if ((mins = getFieldInput(minsInput, n)) === null) {
         minsCross.innerHTML = "&#10008; Invalid input";
+        clearSolution(state.solbox);
+
+        // clear the kmap
+        for (let c of state.getCells()) {
+            c.children[0].innerHTML = "&nbsp;";
+        }
+        
         return null;
     }
 
     let dcs;
     if ((dcs = getFieldInput(dcsInput, n)) === null) {
         dcsCross.innerHTML = "&#10008; Invalid input";
+        clearSolution(state.solbox);
+
+        for (let c of state.getCells()) {
+            c.children[0].innerHTML = "&nbsp;";
+        }
+
         return null;
     }
 
@@ -243,6 +259,9 @@ function resetKmap() {
 
     minsInput.value = '';
     dcsInput.value = '';
+
+    document.getElementById("minsCross").innerHTML = "";
+    document.getElementById("dcsCross").innerHTML = "";
 }
 
 function main() {
