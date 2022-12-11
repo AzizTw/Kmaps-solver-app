@@ -134,6 +134,10 @@ function enableInputs(){
 
 function main() {
     let state = new State();
+
+    // <select> for picking a kmap from the database
+    let kmapIdSel = document.getElementById("kmapId");
+
     drawKmap(state);
     labelCells(state);
 
@@ -145,6 +149,9 @@ function main() {
         // clearSolution(state.solbox);
         drawKmap(state);
         labelCells(state);
+        disableInputs();
+        clearSolution(state.solbox);
+        resetInputs()
     });
     document.getElementById("randBtn").addEventListener("click", () => {
         randomizeKmap(state);
@@ -152,14 +159,15 @@ function main() {
         resetInputs();
         enableInputs();
         clearSolution(state.solbox);
+        // set kmapIdSel to be the default value
+        // how wtf
     });
 
     document.getElementById("checkBtn").addEventListener("click", () => {
         checkSolution();
     });
 
-    // <select> for picking a kmap from the database
-    let kmapIdSel = document.getElementById("kmapId");
+
     kmapIdSel.addEventListener("change", () => {
         requestInput(parseInt(kmapIdSel.value)).then((res) => {
             state.select.value = res.input.n.toString();
@@ -168,6 +176,7 @@ function main() {
             globalSolution = res.sol;
             enableInputs()
             clearSolution(state.solbox);
+            resetInputs()
         });
     });
 
