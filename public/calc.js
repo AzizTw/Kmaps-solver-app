@@ -173,22 +173,28 @@ function solve() {
 function handleFieldsInput(n) {
     let minsInput = document.getElementById("minterms");
     let dcsInput = document.getElementById("dontcares");
+    let minsCross = document.getElementById("minsCross");
+    let dcsCross = document.getElementById("dcsCross");
 
     let mins;
     if ((mins = getFieldInput(minsInput, n)) === null) {
-        console.log("invalid mins"); // do something
+        minsCross.innerHTML = "&#10008; Invalid input";
         return null;
     }
 
     let dcs;
     if ((dcs = getFieldInput(dcsInput, n)) === null) {
-        console.log("invalid dcs"); // something
+        dcsCross.innerHTML = "&#10008; Invalid input";
         return null;
     }
 
+    // clear crosses if input is valid
+    dcsCross.innerHTML = "";
+    minsCross.innerHTML = "";
     let intersection = mins.filter((min) => dcs.includes(min));
     if (intersection.length !== 0) {
-        console.log("there's intersection!"); // do somethingk
+        console.log("there's intersection!"); // do something
+
         return null;
     }
 
