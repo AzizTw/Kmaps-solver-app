@@ -46,13 +46,13 @@ export function showSolution(sol, solbox) {
     let liEpis = document.createElement("li");
     let liPis = document.createElement("li");
     let liSops = document.createElement("li");
-    liPis.innerHTML = "<div class='legend'>PIs &nbsp;</div>";
-    liSops.innerHTML = "<div class='legend'>Sops</div>";
+    liPis.innerHTML = "<div class='legend'><abbr title='Prime implicants'>PIs</abbr> &nbsp;</div>";
+    liSops.innerHTML = "<div class='legend'><abbr title='Sum of products'>Sops</abbr></div>";
 
     if (sol.epis.length !== 0){
-        liEpis.innerHTML = "<div class='legend'>EPIs</div>";
+        liEpis.innerHTML = "<div class='legend'><abbr title='Essential prime implicants'>EPIs</abbr></div>";
         liEpis.appendChild(createList(sol.epis, "sub", addCopyOnClick));
-    } 
+    }
 
     liPis.appendChild(createList(sol.pis, "sub", addCopyOnClick));
 
