@@ -15,7 +15,6 @@ body {
     /* max-width: 80vw; */
     text-align: center;
     background-color: #EEEEEE; /* pure white hurts eyes */
-    /* font-family: "Poppins", sans-serif; */
 }
 
 .kmap {
@@ -242,6 +241,9 @@ button#checkBtn, button#showSolBtn {
 .topnav {
     background-color: #222831;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   /* Style the links inside the navigation bar */
@@ -249,7 +251,7 @@ button#checkBtn, button#showSolBtn {
     float: left;
     color: #EEEEEE;
     text-align: center;
-    padding: 14px 16px;
+    padding: 12px 14px;
     text-decoration: none;
     font-size: 17px;
   }
@@ -275,6 +277,7 @@ button#checkBtn, button#showSolBtn {
     background: #EEEEEE;
     border: 0;
     cursor: pointer;
+    font-family: serif;
     font-size: 18px;
     font-weight: 600;
     transition: all 0.2s ease-in-out;
@@ -346,13 +349,14 @@ button#checkBtn, button#showSolBtn {
     color: #EEEEEE;
     border: 0;
     outline: none;
+    font-family: serif;
     font-size: 18px;
     font-weight: 500;
     border-radius: 30px;
     cursor: pointer;
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
-
   }
+
 #minsCross, #dcsCross {
     position: absolute;
     padding-left: 5px;
