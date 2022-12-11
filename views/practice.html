@@ -20,9 +20,9 @@
         <h1>K-map Practice</h1>
         <!-- TODO: remove later -->
         <br>
+        <!-- <br>
         <br>
-        <br>
-        <br>
+        <br> -->
 
         <main>
 
@@ -54,25 +54,29 @@
 
             <div class="input-sol">
                 <div class="input-row">
-                    <label for="nPIs">Number of PIs:</label>
-                    <input id="nPIs" name="nPIs" type="text">
-                    <span id="nPIsCheck"></span>
-                </div>
-                <div class="input-row">
                     <label for="nEPIs">Number of EPIs:</label>
                     <input id="nEPIs" name="nEPIs" type="text">
                     <span id="nEPIsCheck"></span>
+                </div>
+                <div class="input-row">
+                    <label for="nPIs">Number of PIs:</label>
+                    <input id="nPIs" name="nPIs" type="text">
+                    <span id="nPIsCheck"></span>
                 </div>
                 <div class="input-row">
                     <label for="SOP">One possible SOP:</label>
                     <input id="SOP" name="SOP" type="text">
                     <span id="SOPCheck"></span>
                 </div>
+                
                 <button id="checkBtn">Check</button>
+                <button id="showSolBtn">Show Solution</button>
+                
             </div>
 
             <div id="solutionBox">
             </div>
+            <span id="copy-tooltip">copied!</span>
         </main>
 
         <script type="module" src="practice.js"></script>

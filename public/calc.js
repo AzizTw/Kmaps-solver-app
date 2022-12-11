@@ -2,6 +2,7 @@ import {
     getSolution,
     showSolution,
     clearSolution,
+    clearErrors,
     drawKmap,
     getKmapInput,
     labelCells,
@@ -11,6 +12,7 @@ import {
     VALUES,
     LENGTH,
     are_covered,
+    activateSubs,
 } from "./utils.js";
 
 import { State } from "./state.js";
@@ -40,42 +42,10 @@ function activateCells(state) {
             c.children[0].innerHTML = nextValue(c.children[0].innerHTML);
             fillFields();
             solve();
+            clearErrors();
         });
 }
 
-function activateSubs(){
-    let subs = document.querySelectorAll(".subCell");
-
-    subs.forEach((sub) => {
-        sub.addEventListener("mouseover", () => {
-            highlightMins(sub.textContent);
-        });
-        
-        sub.addEventListener("mouseout", () => {
-            unhighlightMins(sub.textContent);
-        });
-    });
-}
-
-function highlightMins(implicant){
-    let cells = state.getCells();
-    let pattern = kmapPattern(state.nRows, state.nCols);
-    let mins = are_covered(state, implicant)
-
-    mins.forEach((min) => {
-        cells[pattern.indexOf(min)].classList.add("highlight");
-    });
-}
-
-function unhighlightMins(implicant){
-    let cells = state.getCells();
-    let pattern = kmapPattern(state.nRows, state.nCols);
-    let mins = are_covered(state, implicant)
-
-    mins.forEach((min) => {
-        cells[pattern.indexOf(min)].classList.remove("highlight");
-    });
-}
 
 // returns an array of numbers from a list of a comma seperated strings
 // If the string is invalid, returns null. If the string is empty
@@ -164,7 +134,7 @@ function solve() {
     else
         getSolution(input).then((sol) => {
             showSolution(sol, state.solbox);
-            activateSubs();
+            activateSubs(state);
         });
     
 }
@@ -173,25 +143,63 @@ function solve() {
 function handleFieldsInput(n) {
     let minsInput = document.getElementById("minterms");
     let dcsInput = document.getElementById("dontcares");
+    let minsCross = document.getElementById("minsCross");
+    let dcsCross = document.getElementById("dcsCross");
+    let intsc = document.getElementById("intersection");
 
     let mins;
-    if ((mins = getFieldInput(minsInput, n)) === null) {
-        console.log("invalid mins"); // do something
-        return null;
-    }
-
     let dcs;
-    if ((dcs = getFieldInput(dcsInput, n)) === null) {
-        console.log("invalid dcs"); // something
+    if ((mins = getFieldInput(minsInput, n)) === null || (dcs = getFieldInput(dcsInput, n)) === null) {
+        // minsCross.innerHTML = "&#10008; Invalid input";
+        clearSolution(state.solbox);
+        intsc.innerHTML = "";
+
+        if (getFieldInput(minsInput, n) === null)
+            minsCross.innerHTML = "&#10008; Invalid input";
+        else
+            minsCross.innerHTML = "";
+
+        if (getFieldInput(dcsInput, n) === null)
+            dcsCross.innerHTML = "&#10008; Invalid input";
+        else
+            dcsCross.innerHTML = "";
+
+
+        // clear the kmap
+        for (let c of state.getCells()) {
+            c.children[0].innerHTML = "&nbsp;";
+        }
+        
         return null;
     }
 
+    // if ((dcs = getFieldInput(dcsInput, n)) === null) {
+    //     dcsCross.innerHTML = "&#10008; Invalid input";
+    //     clearSolution(state.solbox);
+
+    //     for (let c of state.getCells()) {
+    //         c.children[0].innerHTML = "&nbsp;";
+    //     }
+
+    //     return null;
+    // }
+
+    // clear crosses if input is valid
+    dcsCross.innerHTML = "";
+    minsCross.innerHTML = "";
     let intersection = mins.filter((min) => dcs.includes(min));
     if (intersection.length !== 0) {
-        console.log("there's intersection!"); // do somethingk
+        console.log("there's intersection!"); // do something
+        intsc.innerHTML = "&#10008; There's an intersection between minterms and don't cares!";
+
+        for (let c of state.getCells()) {
+            c.children[0].innerHTML = "&nbsp;";
+        }
+        clearSolution(state.solbox);
         return null;
     }
 
+    intsc.innerHTML = "";
     let input = {n, mins, dcs};
     if (mins.length === 0)
         clearSolution(state.solbox);
@@ -237,6 +245,9 @@ function resetKmap() {
 
     minsInput.value = '';
     dcsInput.value = '';
+
+    document.getElementById("minsCross").innerHTML = "";
+    document.getElementById("dcsCross").innerHTML = "";
 }
 
 function main() {
@@ -254,6 +265,7 @@ function main() {
         clearInput(minsInput, dcsInput);
         labelCells(state);
         activateCells(state);
+        clearErrors();
         // fillKmap(); No, we want to clear the kmap
         // handleFieldsInput(state.n);
     });
