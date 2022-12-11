@@ -277,6 +277,27 @@ button#checkBtn, button#showSolBtn {
     cursor: pointer;
     font-size: 18px;
     font-weight: 600;
+    transition: all 0.2s ease-in-out;
+    animation: jump-shaking 0.8s 0s;
+  }
+
+  @keyframes jump-shaking {
+    0% { transform: translateX(0) }
+    10% { transform: translateY(-9px) }
+    20% { transform: translateY(-9px) rotate(17deg) }
+    30% { transform: translateY(-9px) rotate(-17deg) }
+    40% { transform: translateY(-9px) rotate(17deg) }
+    50% { transform: translateY(-9px) rotate(-17deg) }
+    60% { transform: translateY(-9px) rotate(17deg) }
+    70% { transform: translateY(-9px) rotate(-17deg) }
+    80% { transform: translateY(-9px) rotate(17deg) }
+    90% { transform: translateY(-9px) rotate(-17deg) }
+    100% { transform: translateY(0) rotate(0) }
+  }
+
+  .aboutBtn:hover{
+    transform: scale(1.1);
+    color: #393E46;
   }
 
   .modal_container{
