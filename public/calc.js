@@ -12,6 +12,7 @@ import {
     VALUES,
     LENGTH,
     are_covered,
+    activateSubs,
 } from "./utils.js";
 
 import { State } from "./state.js";
@@ -45,39 +46,6 @@ function activateCells(state) {
         });
 }
 
-function activateSubs(){
-    let subs = document.querySelectorAll(".subCell");
-
-    subs.forEach((sub) => {
-        sub.addEventListener("mouseover", () => {
-            highlightMins(sub.textContent);
-        });
-        
-        sub.addEventListener("mouseout", () => {
-            unhighlightMins(sub.textContent);
-        });
-    });
-}
-
-function highlightMins(implicant){
-    let cells = state.getCells();
-    let pattern = kmapPattern(state.nRows, state.nCols);
-    let mins = are_covered(state, implicant)
-
-    mins.forEach((min) => {
-        cells[pattern.indexOf(min)].classList.add("highlight");
-    });
-}
-
-function unhighlightMins(implicant){
-    let cells = state.getCells();
-    let pattern = kmapPattern(state.nRows, state.nCols);
-    let mins = are_covered(state, implicant)
-
-    mins.forEach((min) => {
-        cells[pattern.indexOf(min)].classList.remove("highlight");
-    });
-}
 
 // returns an array of numbers from a list of a comma seperated strings
 // If the string is invalid, returns null. If the string is empty
@@ -166,7 +134,7 @@ function solve() {
     else
         getSolution(input).then((sol) => {
             showSolution(sol, state.solbox);
-            activateSubs();
+            activateSubs(state);
         });
     
 }
