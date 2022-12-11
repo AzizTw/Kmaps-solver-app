@@ -137,7 +137,8 @@ function main() {
     drawKmap(state);
     labelCells(state);
 
-    let showSolBtn = document.getElementById("showSolBtn");
+    
+    disableInputs()
 
     state.select.addEventListener("change", () => {
         state.setN(parseInt(state.select.value));
@@ -169,6 +170,8 @@ function main() {
             clearSolution(state.solbox);
         });
     });
+
+    let showSolBtn = document.getElementById("showSolBtn");
 
     showSolBtn.disabled = true;
     showSolBtn.addEventListener("click", () => {
