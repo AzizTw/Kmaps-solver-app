@@ -251,3 +251,7 @@ button#resetBtn, button#checkBtn {
     color: #1a1f26;
   }
   /* END OF NAV STYLING */
+
+#minsCross, #dcsCross {
+    position: absolute;
+}
