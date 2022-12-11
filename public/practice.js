@@ -1,8 +1,20 @@
 import { State } from "./state.js";
-import { drawKmap, labelCells, getKmapInput, getSolution, fillKmap, VALUES, LENGTH } from "./utils.js";
+
+import {
+    drawKmap,
+    labelCells,
+    getKmapInput,
+    getSolution,
+    fillKmap,
+    VALUES,
+    LENGTH,
+    showSolution,
+    activateSubs,
+    clearSolution,
+} from "./utils.js";
 
 let globalSolution;
-
+let state;
 let nEPIsInput = document.getElementById("nEPIs");
 let nPIsInput = document.getElementById("nPIs");
 let sopInput = document.getElementById("SOP");
@@ -35,9 +47,15 @@ function storeSolution(state) {
 }
 
 function checkSOP(answerSOP){
+    console.log(answerSOP);
+    console.log(globalSolution.sops);
+    if (answerSOP.length === 0)
+        return false;
+
     for (let correctSOP of globalSolution.sops)
-        if (answerSOP.every((minterm) => correctSOP.includes(minterm)))
+        if (correctSOP.every((term) => answerSOP.includes(term)))
             return true;
+
     return false;
 }
 
@@ -97,10 +115,29 @@ async function requestInput(id) {
     return await res.json();
 }
 
+function disableInputs(){
+    nEPIsInput.disabled = true;
+    nPIsInput.disabled = true;
+    sopInput.disabled = true;
+    document.getElementById("checkBtn").disabled = true;
+    document.getElementById("showSolBtn").disabled = true;
+}
+
+function enableInputs(){
+    nEPIsInput.disabled = false;
+    nPIsInput.disabled = false;
+    sopInput.disabled = false;
+    document.getElementById("checkBtn").disabled = false;
+    document.getElementById("showSolBtn").disabled = false;
+}
+
+
 function main() {
     let state = new State();
     drawKmap(state);
     labelCells(state);
+
+    let showSolBtn = document.getElementById("showSolBtn");
 
     state.select.addEventListener("change", () => {
         state.setN(parseInt(state.select.value));
@@ -112,6 +149,8 @@ function main() {
         randomizeKmap(state);
         storeSolution(state);
         resetInputs();
+        enableInputs();
+        clearSolution(state.solbox);
     });
 
     document.getElementById("checkBtn").addEventListener("click", () => {
@@ -126,8 +165,21 @@ function main() {
             state.select.dispatchEvent(new Event('change')); // run a change event
             fillKmap(res.input, state);
             globalSolution = res.sol;
+            enableInputs()
+            clearSolution(state.solbox);
         });
     });
+
+    showSolBtn.disabled = true;
+    showSolBtn.addEventListener("click", () => {
+        console.log(globalSolution);
+        console.log(state.solbox);
+        showSolution(globalSolution, state.solbox);
+        activateSubs(state);
+        //disable the input fields
+        disableInputs();
+    }
+    );
 }
 
 main();
