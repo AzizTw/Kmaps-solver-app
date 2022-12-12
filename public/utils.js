@@ -144,10 +144,10 @@ export function labelCells(state) {
         i++;
     }
 
-    if (state.n >= 5)
-        document
-            .querySelectorAll(".cell-label")
-            .forEach((label) => (label.style.fontSize = "40%"));
+    // if (state.n >= 5)
+    //     document
+    //         .querySelectorAll(".cell-label")
+    //         .forEach((label) => (label.style.fontSize = "40%"));
 }
 
 // Given an array of values, it returns an object containing:
