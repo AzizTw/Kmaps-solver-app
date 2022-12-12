@@ -305,7 +305,7 @@ button#checkBtn, button#showSolBtn {
   }
 
   @media only screen and (max-width: 600px) {
-    .aboutBtn {
+    .aboutBtn , .modal_container{
       visibility: hidden;
     }
   }
@@ -329,6 +329,7 @@ button#checkBtn, button#showSolBtn {
     opacity: 1;
     pointer-events: auto;
   }
+
   .modal{
     background-color: white;
     border-radius: 5px;
