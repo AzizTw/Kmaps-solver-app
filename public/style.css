@@ -244,6 +244,7 @@ button#checkBtn, button#showSolBtn {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 10px;
   }
 
   /* Style the links inside the navigation bar */
