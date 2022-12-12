@@ -57,19 +57,17 @@ Essential things we still did not implement:
 
 - [x] nxn (finished)
 - [x] Labelling the K-Map
-- [ ] Making the kmap responsive with the labels and cellValues, if we choose vars > 4 it becomes a bit awkward.
+- [x] Making the kmap responsive with the labels and cellValues, if we choose vars > 4 it becomes a bit awkward.
 
 
 Great things to implement:
 
-- [ ] An "About" page, also maybe footer and a header (?) because the website looks bland at the moment.
+- [x] An "About" page, also maybe footer and a header (?) because the website looks bland at the moment.
     - it has some abbrevieations like EPIS = Essential Prime Implicants
     - References (to the algorithm for example)
     - how to use!
 
-- [ ] A cool (and very useful) feature where when you hover over an implicant in the solBox, the minterms that this implicant cover will get highlighted.
+- [x] A cool (and very useful) feature where when you hover over an implicant in the solBox, the minterms that this implicant cover will get highlighted.
 
-- [ ] Labelling the borders of the kmap (A, B, C, D..)
-
-feel free to add more.
+- [x] Labelling the borders of the kmap (A, B, C, D..)
 
