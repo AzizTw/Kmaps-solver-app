@@ -304,6 +304,12 @@ button#checkBtn, button#showSolBtn {
     color: #393E46;
   }
 
+  @media only screen and (max-width: 600px) {
+    .aboutBtn {
+      visibility: hidden;
+    }
+  }
+
   .modal_container{
     background-color: rgba(0, 0, 0, 0.3);
     display: flex;
