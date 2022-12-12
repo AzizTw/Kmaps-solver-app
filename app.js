@@ -2,6 +2,8 @@ const express = require('express');
 const kmap = require('./kmap/kamp');
 const sel = require('./data/sel');
 const app = express();
+const PORT = process.env.PORT || 3000;
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
 app.use(express.static("public"));
@@ -52,7 +54,6 @@ app.post('/', (req, res) => {
     res.json(sol);
 })
 
-const PORT = 3000;
 app.listen(PORT, (e) => {
     if (e)
         console.error(e);
