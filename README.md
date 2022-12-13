@@ -71,4 +71,3 @@ Great things to implement:
 
 - [x] Labelling the borders of the kmap (A, B, C, D..)
 
-- [x] Test bla bla bla
